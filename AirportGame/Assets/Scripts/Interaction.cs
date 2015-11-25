@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Interaction : MonoBehaviour {
 
-    public virtual void BeInteractedWith()
+    public virtual void BeInteractedWith(GameObject gO)
     {
         Debug.Log("The defualt BeInteractedWith() was called. That probably shouldn't have happened.");
     }

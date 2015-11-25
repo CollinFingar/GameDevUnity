@@ -42,13 +42,13 @@ public class Interact : MonoBehaviour {
                 if (hit.transform == null)
                 { Debug.LogError("INTERACT: Raycast return null transform."); }
                 Interaction Interactable = hit.transform.GetComponent<Interaction>();
-                Interactable.BeInteractedWith();
+                Interactable.BeInteractedWith(gameObject);
             }
             else
             {
                 col = Color.red;
             }
-            Debug.DrawLine(ray.origin, ray.GetPoint(interactLength), col, 20f);
+            //Debug.DrawLine(ray.origin, ray.GetPoint(interactLength), col, 20f);
         }
     }
 
@@ -56,9 +56,7 @@ public class Interact : MonoBehaviour {
     {
         var pos = new Vector2(8, 8);
         var size = new Vector2(1024, 32);
-        GUI.Label(new Rect(pos, size), "char rotation: " + transform.position);
-        pos.y += 16;
-        GUI.Label(new Rect(pos, size), "cam rotation: " + fpsCamera.transform.position);
-        pos.y += 16;
+        //GUI.Label(new Rect(pos, size), "Debug Information: "+GetComponentInChildren<Camera>().transform.rotation.eulerAngles);
+        //pos.y += 16;
     }
 }

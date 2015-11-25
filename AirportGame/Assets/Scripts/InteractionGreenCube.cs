@@ -7,7 +7,7 @@ public class InteractionGreenCube : Interaction {
     public Material green;
     bool isRed;
 
-    public override void BeInteractedWith()
+    public override void BeInteractedWith(GameObject gO)
     {
         if (isRed)
         {
