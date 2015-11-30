@@ -15,6 +15,9 @@ public class TSAAgentScript : MonoBehaviour {
     private Vector3 watchRotation = new Vector3();
     private Vector3 velocity = new Vector3();
 
+    public Vector3 EXAMPLE_SPAWN_LOCATION = new Vector3(16, -.85f, 10);
+    public GameObject itself;
+
 	// Use this for initialization
 	void Start () {
         watchSpot = transform.position;
@@ -26,10 +29,14 @@ public class TSAAgentScript : MonoBehaviour {
         float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
         Vector3 targetDirection = player.transform.position - transform.position;
         float angleToPlayer = Vector3.Angle(targetDirection, transform.forward);
-        if (distanceToPlayer < noticeDistance && distanceToPlayer > 2 && angleToPlayer < 45) {
-            transform.rotation = Quaternion.LookRotation(Vector3.RotateTowards(transform.forward, targetDirection, turnSpeed * Time.deltaTime, 0.0f));
-            transform.position += transform.forward * speed * Time.deltaTime;
-            followingPlayer = true;
+        if (distanceToPlayer < noticeDistance && angleToPlayer < 45) {
+            if (distanceToPlayer > 2) {
+                transform.rotation = Quaternion.LookRotation(Vector3.RotateTowards(transform.forward, targetDirection, turnSpeed * Time.deltaTime, 0.0f));
+                transform.position += transform.forward * speed * Time.deltaTime;
+                followingPlayer = true;
+            } else {
+                Debug.Log("Gotcha");
+            }
         } else {
             if (followingPlayer) {
                 movingBack = true;
@@ -52,5 +59,16 @@ public class TSAAgentScript : MonoBehaviour {
             }
             
         }
+
+        if (Input.GetKeyDown(KeyCode.T)) {
+            spawnAgent(EXAMPLE_SPAWN_LOCATION);
+        }
 	}
+
+    void spawnAgent(Vector3 location) {
+        GameObject newAgent = (GameObject)Instantiate(itself, location, Quaternion.identity);
+        Vector3 targetDirection = player.transform.position - newAgent.transform.position;
+        float angleToPlayer = Vector3.Angle(targetDirection, newAgent.transform.forward);
+        newAgent.transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, angleToPlayer, transform.localEulerAngles.z);
+    }
 }
