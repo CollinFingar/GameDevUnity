@@ -24,7 +24,17 @@ public class InteractionSwitchAgent : Interaction {
         {
             Vector3 tempPosition = transform.position;
             Quaternion tempQuatn = transform.rotation;
-            transform.position = gO.transform.position;
+            Vector3 gOGroundPosition;
+
+            /// Raycast to get the position on the ground that this object is going to.
+            {
+                Ray ray = new Ray(gO.transform.position + new Vector3(0,1,0), Vector3.down);
+                RaycastHit hit;
+                bool didHit = Physics.Raycast(ray, out hit, 1 << LayerMask.NameToLayer("Floor"));
+                if (!didHit) { Debug.LogError("SWITCH AGENT: Failed to find ground underneath player."); }
+                gOGroundPosition = hit.point;
+            }
+            transform.position = gOGroundPosition + new Vector3(0,-0.01f,0);
 
             Vector3 playerEuler = gO.transform.rotation.eulerAngles;
             playerEuler.x = 0; // make sure the agent is standing up straight. 

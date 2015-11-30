@@ -242,36 +242,32 @@ namespace UnityStandardAssets.Characters.FirstPerson
         /// sphere cast down just beyond the bottom of the capsule to see if the capsule is colliding round the bottom
         private void GroundCheck()
         {
-            string log = "";
+            //string log = "";
             m_PreviouslyGrounded = m_IsGrounded;
             RaycastHit hitInfo;
 
-            Vector3 fuckYou = transform.position;
-            fuckYou.y += (m_Capsule.radius );
+            Vector3 CastOrigin = transform.position + new Vector3(0, (m_Capsule.radius*1.2f), 0);
+            float CastLength = advancedSettings.groundCheckDistance;
 
-            bool gotHit = Physics.SphereCast(fuckYou, m_Capsule.radius, Vector3.down, out hitInfo,
-                                   /*((m_Capsule.height/2f) - */ advancedSettings.groundCheckDistance);
+            bool gotHit = Physics.SphereCast(CastOrigin, m_Capsule.radius, Vector3.down, out hitInfo,
+                                   CastLength );
 
-            log += "SphereCast from point: " + fuckYou + "\n";
-            log += "  of radius: "+ m_Capsule.radius + "\n";
-            log += "  DOWN " + advancedSettings.groundCheckDistance + " Units\n";
+            Vector3 LinePointOrigin = CastOrigin;
+            Vector3 LinePointRadius = CastOrigin - new Vector3(0,(m_Capsule.radius),0);
+            Vector3 LinePointProjection = LinePointRadius - new Vector3(0,CastLength,0);
 
-            Vector3 fuckYou2 = fuckYou;
-            fuckYou2.y -= m_Capsule.radius;
-            Vector3 fuckYou3 = fuckYou2;
-            fuckYou3.y -= advancedSettings.groundCheckDistance;
-            Debug.DrawLine(fuckYou, fuckYou2, Color.blue, Time.deltaTime);
-            Debug.DrawLine(fuckYou2, fuckYou3, Color.red, Time.deltaTime);
+            Debug.DrawLine(LinePointOrigin, LinePointRadius, Color.blue, Time.deltaTime);
+            Debug.DrawLine(LinePointRadius, LinePointProjection, Color.red, Time.deltaTime);
 
             if (gotHit)
             {
-                log += "  Did Hit.\n";
+                //log += "  Did Hit.\n";
                 m_IsGrounded = true;
                 m_GroundContactNormal = hitInfo.normal;
             }
             else
             {
-                log += "  No Hit.\n";
+                //log += "  No Hit.\n";
                 m_IsGrounded = false;
                 m_GroundContactNormal = Vector3.up;
             }
@@ -280,7 +276,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 m_Jumping = false;
             }
 
-            Debug.Log(log);
+            //Debug.Log(log);
         }
     }
 }
