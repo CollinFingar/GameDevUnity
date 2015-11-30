@@ -35,10 +35,10 @@ public class Interact : MonoBehaviour {
             RaycastHit hit;
             bool didHit = Physics.Raycast(ray, out hit, interactLength, 1 << LayerMask.NameToLayer("Interactable"));
 
-            Color col;
+            //Color col;
             if (didHit)
             {
-                col = Color.green;
+                //col = Color.green;
                 if (hit.transform == null)
                 { Debug.LogError("INTERACT: Raycast return null transform."); }
                 Interaction Interactable = hit.transform.GetComponent<Interaction>();
@@ -46,7 +46,7 @@ public class Interact : MonoBehaviour {
             }
             else
             {
-                col = Color.red;
+                //col = Color.red;
             }
             //Debug.DrawLine(ray.origin, ray.GetPoint(interactLength), col, 20f);
         }
@@ -55,7 +55,7 @@ public class Interact : MonoBehaviour {
     void OnGUI()
     {
         var pos = new Vector2(8, 8);
-        var size = new Vector2(1024, 32);
+        //var size = new Vector2(1024, 32);
         //GUI.Label(new Rect(pos, size), "Debug Information: "+GetComponentInChildren<Camera>().transform.rotation.eulerAngles);
         //pos.y += 16;
     }

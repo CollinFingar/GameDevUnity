@@ -18,16 +18,12 @@ public class InteractionSwitchAgent : Interaction {
             GetComponent<MeshRenderer>().material = gO.GetComponent<MeshRenderer>().material;
             GetComponent<MeshFilter>().mesh= gO.GetComponent<MeshFilter>().mesh;
             gO.GetComponent<MeshRenderer>().material = tempMat;
-            gO.GetComponent<MeshFilter>().mesh = tempMesh;
         }
 
         /// Swap world position information
         {
-            //Debug.Log("Camera Rotation: "+gO.GetComponentInChildren<Camera>().transform.rotation);
-
             Vector3 tempPosition = transform.position;
             Quaternion tempQuatn = transform.rotation;
-            //Debug.Log("object rotation: " + tempQuatn);
             transform.position = gO.transform.position;
 
             Vector3 playerEuler = gO.transform.rotation.eulerAngles;
@@ -35,9 +31,6 @@ public class InteractionSwitchAgent : Interaction {
             transform.rotation = Quaternion.Euler(playerEuler);
 
             gO.transform.position = tempPosition;
-            //gO.GetComponentInChildren<Camera>().transform.rotation = tempQuatn;
-            //gO.transform.rotation = tempQuatn;
-            //Debug.Log("object rotation2: " + tempQuatn);
         }
     }
 
