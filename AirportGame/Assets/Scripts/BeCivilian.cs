@@ -10,6 +10,14 @@ public class BeCivilian : MonoBehaviour {
     private CivilianAction[] QueuedBehaviours;
 
     public bool HideWaypoints = false;
+    public GameObject Player;
+
+    // Behaviour Specific:
+    // Wait
+    float elapsedSeconds = 0;
+    // Selfie
+    public bool EndedSelfie = false;
+    public bool TakingSelfie = false;
 
 	// Use this for initialization
 	void Start () {
@@ -67,23 +75,74 @@ public class BeCivilian : MonoBehaviour {
 
     ActionFlag MoveTo(Vector3 TargetPosition)
     {
+        /// POSSIBLE EDITOR ARGUMENTS
         float TravelSpeed = 2f;
-        float ArriveDistance = TravelSpeed;// * (1f / 15f);
+        float ArriveDistance = TravelSpeed * Time.deltaTime * 1.2f;
+
         Vector3 NewPosition = Vector3.Normalize(TargetPosition - transform.position)*TravelSpeed*Time.deltaTime;
         transform.position += NewPosition;
 
-        float DistanceToTarget = Vector3.Distance(TargetPosition, NewPosition);
-        Debug.Log(DistanceToTarget);
+        float DistanceToTarget = Vector3.Distance(TargetPosition, transform.position);
         if ( DistanceToTarget < ArriveDistance)
         {
             return ActionFlag.ActionComplete;
         }
-
         return ActionFlag.None;
     }
 
     ActionFlag TakeSelfie(Vector3 TargetPosition, float Distance)
-    { return 0; }
+    {
+        if (EndedSelfie)
+        {
+            EndedSelfie = false;
+            TakingSelfie = false;
+
+            // Set animation normal
+            return ActionFlag.ActionComplete;
+        }
+        if (TakingSelfie)
+        {
+            // Trigger Selfie animation
+            // Animation will call end selfie function
+
+            // ======================================= TEMP while no animations
+            if (elapsedSeconds > 1f)             //|
+            {                                    //|
+                elapsedSeconds = 0;              //|
+                EndSelfie(TargetPosition);       //|
+            }                                    //|
+            elapsedSeconds += Time.deltaTime;    //|
+            // ======================================= TEMP while no animations
+
+            if (!HideWaypoints) { ShowDebugSelfieIndications(TargetPosition); }
+            ShowSelfieIndications(TargetPosition);
+
+        }
+        else
+        {
+            TakingSelfie = true;
+        }
+        return 0;
+    }
+
+    public void EndSelfie(Vector3 TargetPosition)
+    {
+        // Check if the player is in the dangerous part of the hazard.
+        Vector3 TargetHeading = Vector3.Normalize(TargetPosition - transform.position);
+        Quaternion SelfieDirection = Quaternion.LookRotation(TargetHeading);
+        Vector3 PlayerHeading = Vector3.Normalize(Player.transform.position - transform.position);
+        Quaternion PlayerDirection = Quaternion.LookRotation(PlayerHeading);
+        float Angle = Quaternion.Angle(SelfieDirection, PlayerDirection);
+
+        if ((Angle < 30f) && (Vector3.Distance(transform.position,Player.transform.position) < Vector3.Magnitude(TargetPosition - transform.position)))
+        {
+            Debug.Log("Player Caught in a selfie!");
+            // Player Hit by hazard:
+
+        }
+
+        EndedSelfie = true;
+    }
 
     ActionFlag UseTwitter(Vector3 TargetPosition, float Radius)
     { return 0; }
@@ -92,5 +151,47 @@ public class BeCivilian : MonoBehaviour {
     { return 0; }
 
     ActionFlag Wait(float Seconds)
-    { return 0; }
+    {
+        if (elapsedSeconds > Seconds)
+        {
+            elapsedSeconds = 0;
+            return ActionFlag.ActionComplete;
+        }
+
+        elapsedSeconds += Time.deltaTime;
+        return 0;
+    }
+
+    void ShowSelfieIndications(Vector3 TargetPosition)
+    {
+
+    }
+
+    void ShowDebugSelfieIndications(Vector3 TargetPosition)
+    {
+        // Show Hazard Indications
+        Vector3 TargetHeading = Vector3.Normalize(TargetPosition - transform.position);
+        Quaternion SelfieDirection = Quaternion.LookRotation(TargetHeading);
+        Vector3 LineEndpoint = transform.position + (SelfieDirection * (Vector3.forward * Vector3.Distance(transform.position, TargetPosition)));
+        Debug.DrawLine(transform.position, LineEndpoint, Color.red, Time.deltaTime);
+
+        float DangerHalfAngleDegrees = 30f;
+        int DangerIndicationDivisions = 5;
+        float DangerIncrementation = (DangerHalfAngleDegrees * 2f) / (DangerIndicationDivisions);
+        int Lines = DangerIndicationDivisions + 1;
+
+        Vector3 OriginDirection = SelfieDirection.eulerAngles;
+        OriginDirection.y += 30f;
+        Quaternion LoopOriginDirection = Quaternion.Euler(OriginDirection);
+
+        for (int LineIndex = 0; LineIndex < Lines; LineIndex++)
+        {
+            Quaternion LineDirection = LoopOriginDirection;
+            Vector3 LineDirectionEuler = LineDirection.eulerAngles;
+            LineDirectionEuler.y -= (LineIndex * (DangerIncrementation));
+            LineDirection = Quaternion.Euler(LineDirectionEuler);
+            Vector3 IndicationEndpoint = transform.position + (LineDirection * (Vector3.forward * Vector3.Distance(transform.position, TargetPosition)));
+            Debug.DrawLine(transform.position, IndicationEndpoint, Color.blue, Time.deltaTime);
+        }
+    }
 }
