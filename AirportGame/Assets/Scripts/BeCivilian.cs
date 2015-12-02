@@ -176,7 +176,7 @@ public class BeCivilian : MonoBehaviour {
             {
                 if (!caughtPlayer)
                 {
-                    Debug.Log("Player caught next to twitter user!");
+                    Debug.Log("Player caught running next to twitter user!");
                     caughtPlayer = true;
                 }
             }
@@ -208,7 +208,7 @@ public class BeCivilian : MonoBehaviour {
             {
                 if (!caughtPlayer)
                 {
-                    Debug.Log("Player caught running next to tumblr user!");
+                    Debug.Log("Player caught next to tumblr user!");
                     caughtPlayer = true;
                 }
             }
