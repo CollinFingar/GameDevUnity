@@ -18,10 +18,13 @@ public class TSAAgentScript : MonoBehaviour {
     public Vector3 EXAMPLE_SPAWN_LOCATION = new Vector3(16, -.85f, 10);
     public GameObject itself;
 
+    private Rigidbody rb;
+
 	// Use this for initialization
 	void Start () {
         watchSpot = transform.position;
         watchRotation = transform.localEulerAngles;
+        rb = GetComponent<Rigidbody>();
 	}
 	
 	// Update is called once per frame
@@ -54,8 +57,13 @@ public class TSAAgentScript : MonoBehaviour {
                 }
             }
             else {
-                if (Mathf.Abs(transform.localEulerAngles.y - watchRotation.y) < 5) {
-                    transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y + 5, transform.localEulerAngles.z);
+                if (Mathf.Abs(transform.localEulerAngles.y - watchRotation.y) > 5)
+                {
+                    transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y + 5, 0);
+                }
+                else {
+                    transform.localEulerAngles = watchRotation;
+                    rb.velocity = new Vector3(0, 0, 0);
                 }
             }
             
@@ -64,6 +72,8 @@ public class TSAAgentScript : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.T)) {
             spawnAgent(EXAMPLE_SPAWN_LOCATION);
         }
+
+        transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, transform.localEulerAngles.z);
 	}
 
     void spawnAgent(Vector3 location) {
