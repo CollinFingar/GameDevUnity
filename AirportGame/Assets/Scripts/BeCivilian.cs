@@ -14,13 +14,17 @@ public class BeCivilian : MonoBehaviour {
 
     // Behaviour Specific:
     // Wait
-    float elapsedSeconds = 0;
+    float elapsedSeconds = 0f;
     // Selfie
     public bool EndedSelfie = false;
     public bool TakingSelfie = false;
+    // Twitter
+    private bool caughtPlayer = false;
+    private Vector3 playerLastFramePosition = new Vector3();
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
         QueuedBehaviours = GetComponentsInChildren<CivilianAction>();
         foreach (CivilianAction Action in QueuedBehaviours)
         {
@@ -28,7 +32,8 @@ public class BeCivilian : MonoBehaviour {
             Renderer.enabled = !HideWaypoints;
             Action.transform.parent = null;
         }
-	}
+        playerLastFramePosition = Player.transform.position;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -71,7 +76,9 @@ public class BeCivilian : MonoBehaviour {
         {
             ActionIndex++;
         }
-	}
+
+        playerLastFramePosition = Player.transform.position;
+    }
 
     ActionFlag MoveTo(Vector3 TargetPosition)
     {
@@ -137,18 +144,82 @@ public class BeCivilian : MonoBehaviour {
         if ((Angle < 30f) && (Vector3.Distance(transform.position,Player.transform.position) < Vector3.Magnitude(TargetPosition - transform.position)))
         {
             Debug.Log("Player Caught in a selfie!");
-            // Player Hit by hazard:
-
         }
 
         EndedSelfie = true;
     }
 
-    ActionFlag UseTwitter(Vector3 TargetPosition, float Radius)
-    { return 0; }
+    ActionFlag UseTwitter(Vector3 TargetPosition, float Duration)
+    {
+        float startTime = 1f;
+        if (elapsedSeconds > Duration)         
+        {                                
+            elapsedSeconds = 0;
+            caughtPlayer = false;
+            return ActionFlag.ActionComplete;
+        }
+        
+        Color hazardColor = Color.blue;
+        if (elapsedSeconds > startTime)
+        {
+            var PlayerController = Player.GetComponent<UnityStandardAssets.Characters.FirstPerson.RigidbodyFirstPersonController>();
+            float PlayerWalkSpeedDistance = PlayerController.movementSettings.ForwardSpeed * Time.deltaTime;
+            float lastFramePlayerDistance = Vector3.Distance(Player.transform.position, playerLastFramePosition);
 
-    ActionFlag UseTumblr(Vector3 TargetPosition, float Radius)
-    { return 0; }
+            // Check to see if the player is hit by hazards
+            float hazardDistance = Vector3.Distance(transform.position, TargetPosition);
+            if (
+                 ( Vector3.Distance(transform.position, Player.transform.position) < hazardDistance)
+                  &&
+                 ( lastFramePlayerDistance > PlayerWalkSpeedDistance)
+               )
+            {
+                if (!caughtPlayer)
+                {
+                    Debug.Log("Player caught next to twitter user!");
+                    caughtPlayer = true;
+                }
+            }
+            hazardColor = Color.red;
+        }
+        elapsedSeconds += Time.deltaTime;
+
+        if (!HideWaypoints) { ShowDebugTwitterIndications(TargetPosition, hazardColor); }
+        //ShowTwitterIndications(TargetPosition);
+        return 0;    
+    }
+
+    ActionFlag UseTumblr(Vector3 TargetPosition, float Duration)
+    {
+        float startTime = 1f;
+        if (elapsedSeconds > Duration)
+        {
+            elapsedSeconds = 0;
+            caughtPlayer = false;
+            return ActionFlag.ActionComplete;
+        }
+
+        Color hazardColor = Color.blue;
+        if (elapsedSeconds > startTime)
+        {
+            // Check to see if the player is hit by hazards
+            float hazardDistance = Vector3.Distance(transform.position, TargetPosition);
+            if (Vector3.Distance(transform.position, Player.transform.position) < hazardDistance)
+            {
+                if (!caughtPlayer)
+                {
+                    Debug.Log("Player caught running next to tumblr user!");
+                    caughtPlayer = true;
+                }
+            }
+            hazardColor = Color.red;
+        }
+        elapsedSeconds += Time.deltaTime;
+
+        if (!HideWaypoints) { ShowDebugTwitterIndications(TargetPosition, hazardColor); }
+        //ShowTwitterIndications(TargetPosition);
+        return 0;
+    }
 
     ActionFlag Wait(float Seconds)
     {
@@ -192,6 +263,33 @@ public class BeCivilian : MonoBehaviour {
             LineDirection = Quaternion.Euler(LineDirectionEuler);
             Vector3 IndicationEndpoint = transform.position + (LineDirection * (Vector3.forward * Vector3.Distance(transform.position, TargetPosition)));
             Debug.DrawLine(transform.position, IndicationEndpoint, Color.blue, Time.deltaTime);
+        }
+    }
+
+    void ShowDebugTwitterIndications(Vector3 TargetPosition, Color lineColor)
+    {
+        // Show Hazard Indications
+        Quaternion SelfieDirection = Quaternion.LookRotation(Vector3.forward);
+        Vector3 LineEndpoint = transform.position + (SelfieDirection * (Vector3.forward * Vector3.Distance(transform.position, TargetPosition)));
+        Debug.DrawLine(transform.position, LineEndpoint, lineColor, Time.deltaTime);
+
+        float DangerHalfAngleDegrees = 180f;
+        int DangerIndicationDivisions = 11;
+        float DangerIncrementation = (DangerHalfAngleDegrees * 2f) / (DangerIndicationDivisions);
+        int Lines = DangerIndicationDivisions + 1;
+
+        Vector3 OriginDirection = SelfieDirection.eulerAngles;
+        OriginDirection.y += DangerHalfAngleDegrees;
+        Quaternion LoopOriginDirection = Quaternion.Euler(OriginDirection);
+
+        for (int LineIndex = 0; LineIndex < Lines; LineIndex++)
+        {
+            Quaternion LineDirection = LoopOriginDirection;
+            Vector3 LineDirectionEuler = LineDirection.eulerAngles;
+            LineDirectionEuler.y -= (LineIndex * (DangerIncrementation));
+            LineDirection = Quaternion.Euler(LineDirectionEuler);
+            Vector3 IndicationEndpoint = transform.position + (LineDirection * (Vector3.forward * Vector3.Distance(transform.position, TargetPosition)));
+            Debug.DrawLine(transform.position, IndicationEndpoint, lineColor, Time.deltaTime);
         }
     }
 }

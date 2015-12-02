@@ -14,7 +14,7 @@ public class InteractionSwitchAgent : Interaction {
         /// There will be other complications.
         {
             Material tempMat = GetComponent<MeshRenderer>().material;
-            Mesh tempMesh = GetComponent<MeshFilter>().mesh;
+            //Mesh tempMesh = GetComponent<MeshFilter>().mesh;
             GetComponent<MeshRenderer>().material = gO.GetComponent<MeshRenderer>().material;
             GetComponent<MeshFilter>().mesh= gO.GetComponent<MeshFilter>().mesh;
             gO.GetComponent<MeshRenderer>().material = tempMat;
@@ -23,7 +23,7 @@ public class InteractionSwitchAgent : Interaction {
         /// Swap world position information
         {
             Vector3 tempPosition = transform.position;
-            Quaternion tempQuatn = transform.rotation;
+            //Quaternion tempQuatn = transform.rotation;
             Vector3 gOGroundPosition;
 
             /// Raycast to get the position on the ground that this object is going to.
@@ -46,8 +46,8 @@ public class InteractionSwitchAgent : Interaction {
 
     void OnGUI()
     {
-        var pos = new Vector2(8, 8);
-        var size = new Vector2(1024, 32);
+        //var pos = new Vector2(8, 8);
+        //var size = new Vector2(1024, 32);
         //GUI.Label(new Rect(pos, size), "Debug Information: ");
         //pos.y += 16;
     }

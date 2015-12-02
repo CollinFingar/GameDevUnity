@@ -54,7 +54,7 @@ public class Interact : MonoBehaviour {
 
     void OnGUI()
     {
-        var pos = new Vector2(8, 8);
+        //var pos = new Vector2(8, 8);
         //var size = new Vector2(1024, 32);
         //GUI.Label(new Rect(pos, size), "Debug Information: "+GetComponentInChildren<Camera>().transform.rotation.eulerAngles);
         //pos.y += 16;
