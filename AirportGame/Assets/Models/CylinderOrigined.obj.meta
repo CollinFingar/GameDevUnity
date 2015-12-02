@@ -1,26 +1,17 @@
 fileFormatVersion: 2
-guid: e0151a1e27f510b4fa451e488689afcf
-timeCreated: 1449090114
+guid: a53844d618db24947abf48a5afa46fb8
+timeCreated: 1449090259
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
     100000: //RootNode
-    100002: BoxModel:joint1
-    100004: BoxModel:joint2
-    100006: BoxModel:joint3
-    100008: BoxModel:Joints
-    100010: BoxModel:pCube1
+    100002: default
     400000: //RootNode
-    400002: BoxModel:joint1
-    400004: BoxModel:joint2
-    400006: BoxModel:joint3
-    400008: BoxModel:Joints
-    400010: BoxModel:pCube1
-    4300000: BoxModel:pCube1
-    7400000: Take 001
-    9500000: //RootNode
-    13700000: BoxModel:pCube1
+    400002: default
+    2300000: default
+    3300000: default
+    4300000: default
   materials:
     importMaterials: 1
     materialName: 0
@@ -79,7 +70,7 @@ ModelImporter:
     rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
