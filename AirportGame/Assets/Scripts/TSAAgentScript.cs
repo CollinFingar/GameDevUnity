@@ -36,6 +36,7 @@ public class TSAAgentScript : MonoBehaviour {
                 followingPlayer = true;
             } else {
                 Debug.Log("Gotcha");
+                Application.LoadLevel(4);
             }
         } else {
             if (followingPlayer) {
