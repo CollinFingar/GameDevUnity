@@ -3,7 +3,8 @@ using System.Collections;
 
 public class Interact : MonoBehaviour {
 
-    private float interactKey;
+    private bool interactKey;
+    private bool interactJustPressed;
     private Camera fpsCamera;
 
     private float interactLength = 1f;
@@ -16,27 +17,46 @@ public class Interact : MonoBehaviour {
 
     void Update()
     {
-        interactKey = Input.GetAxis("Interact");
-        if (interactKey > .5f)
+        bool frameInteractKey = Input.GetAxis("Interact") > .5f;
+
+        interactJustPressed = false;
+        if (interactKey != frameInteractKey)
+        {
+            interactKey = frameInteractKey;
+            if (interactKey) { interactJustPressed = true; }
+        }
+        
+        if (interactJustPressed)
         {
             Vector3 cameraPosition = fpsCamera.transform.position;
             Vector3 cameraDirection = fpsCamera.transform.rotation * Vector3.forward;
 
             Ray ray = new Ray(cameraPosition, cameraDirection);
-            //int tagLayer = 0;
-            //RaycastHit hit;
-            //bool didHit = Physics.Raycast(ray, out hit, interactLength, tagLayer);
-            Debug.DrawRay(ray.GetPoint(0f), cameraDirection*interactLength, Color.red, 20f);
+            RaycastHit hit;
+            bool didHit = Physics.Raycast(ray, out hit, interactLength, 1 << LayerMask.NameToLayer("Interactable"));
+
+            //Color col;
+            if (didHit)
+            {
+                //col = Color.green;
+                if (hit.transform == null)
+                { Debug.LogError("INTERACT: Raycast return null transform."); }
+                Interaction Interactable = hit.transform.GetComponent<Interaction>();
+                Interactable.BeInteractedWith(gameObject);
+            }
+            else
+            {
+                //col = Color.red;
+            }
+            //Debug.DrawLine(ray.origin, ray.GetPoint(interactLength), col, 20f);
         }
     }
 
     void OnGUI()
     {
-        var pos = new Vector2(8, 8);
-        var size = new Vector2(1024, 32);
-        GUI.Label(new Rect(pos, size), "char rotation: " + transform.position);
-        pos.y += 16;
-        GUI.Label(new Rect(pos, size), "cam rotation: " + fpsCamera.transform.position);
-        pos.y += 16;
+        //var pos = new Vector2(8, 8);
+        //var size = new Vector2(1024, 32);
+        //GUI.Label(new Rect(pos, size), "Debug Information: "+GetComponentInChildren<Camera>().transform.rotation.eulerAngles);
+        //pos.y += 16;
     }
 }
