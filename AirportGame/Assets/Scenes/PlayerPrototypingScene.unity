@@ -174,6 +174,7 @@ GameObject:
   - 114: {fileID: 48649752}
   - 33: {fileID: 48649756}
   - 23: {fileID: 48649755}
+  - 114: {fileID: 48649757}
   m_Layer: 0
   m_Name: RigidBodyFPSController
   m_TagString: Untagged
@@ -311,6 +312,17 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 48649750}
   m_Mesh: {fileID: 4300000, guid: a53844d618db24947abf48a5afa46fb8, type: 3}
+--- !u!114 &48649757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 48649750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38ff6c7142c3deb4daf1c1504de98924, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &87935455
 GameObject:
   m_ObjectHideFlags: 0
@@ -1281,7 +1293,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1795772217}
-  m_Mesh: {fileID: 4300000, guid: adaae39aab1197242b2a4b938ad973b3, type: 3}
+  m_Mesh: {fileID: 4300000, guid: a53844d618db24947abf48a5afa46fb8, type: 3}
 --- !u!4 &1795772221
 Transform:
   m_ObjectHideFlags: 0
