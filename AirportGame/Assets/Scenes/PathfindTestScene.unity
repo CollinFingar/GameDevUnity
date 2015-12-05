@@ -155,7 +155,7 @@ Transform:
   m_GameObject: {fileID: 183770822}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -.310000002, y: -3.1400001, z: -15.3199997}
-  m_LocalScale: {x: 8.22037029, y: 4.0241971, z: .70190084}
+  m_LocalScale: {x: 8.22037029, y: 13.6483822, z: .70190084}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -169,7 +169,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: .0500000007
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
@@ -247,11 +247,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 406612, guid: c5a70040c685572479ed6ebda0b099c7, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -.850000024
+      value: -.949999988
       objectReference: {fileID: 0}
     - target: {fileID: 406612, guid: c5a70040c685572479ed6ebda0b099c7, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -2.61999989
+      value: -2.62619996
       objectReference: {fileID: 0}
     - target: {fileID: 406612, guid: c5a70040c685572479ed6ebda0b099c7, type: 2}
       propertyPath: m_LocalRotation.x
@@ -283,6 +283,22 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 5491088, guid: c5a70040c685572479ed6ebda0b099c7, type: 2}
       propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 406612, guid: c5a70040c685572479ed6ebda0b099c7, type: 2}
+      propertyPath: m_LocalScale.x
+      value: .879999995
+      objectReference: {fileID: 0}
+    - target: {fileID: 406612, guid: c5a70040c685572479ed6ebda0b099c7, type: 2}
+      propertyPath: m_LocalScale.y
+      value: .880000055
+      objectReference: {fileID: 0}
+    - target: {fileID: 406612, guid: c5a70040c685572479ed6ebda0b099c7, type: 2}
+      propertyPath: m_LocalScale.z
+      value: .880000055
+      objectReference: {fileID: 0}
+    - target: {fileID: 6501528, guid: c5a70040c685572479ed6ebda0b099c7, type: 2}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -605,7 +621,7 @@ Transform:
   m_GameObject: {fileID: 1479961198}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 6.30999994, y: -3.1400001, z: -9.18000031}
-  m_LocalScale: {x: 8.22037029, y: 4.0241971, z: .70190084}
+  m_LocalScale: {x: 8.22037029, y: 13.6483822, z: .70190084}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
@@ -619,7 +635,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: .0500000007
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
@@ -637,7 +653,7 @@ GameObject:
   - 114: {fileID: 1666972167}
   m_Layer: 0
   m_Name: RigidBodyFPSController
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -649,7 +665,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1666972165}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.73000002, y: 2.8599999, z: -20.4899998}
+  m_LocalPosition: {x: 6.73000002, y: -1.22000003, z: -20.4899998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 560876329}

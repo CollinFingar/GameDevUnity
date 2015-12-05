@@ -38,6 +38,8 @@ public class PopupController : MonoBehaviour {
 	void Update () {
 
         if (Input.GetKeyDown(KeyCode.Alpha2)) {
+            makeVisible("tumblr");
+        } else if (Input.GetKeyDown(KeyCode.Alpha3)) {
             makeVisible("twitter");
         }
 

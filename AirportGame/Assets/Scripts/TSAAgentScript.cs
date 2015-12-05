@@ -29,10 +29,14 @@ public class TSAAgentScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (canSee()) {
+            Debug.Log("I SEE YOU");
+        }
+
         float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
         Vector3 targetDirection = player.transform.position - transform.position;
         float angleToPlayer = Vector3.Angle(targetDirection, transform.forward);
-        if (distanceToPlayer < noticeDistance && angleToPlayer < 45) {
+        if (distanceToPlayer < noticeDistance && angleToPlayer < 45 && canSee()) {
             if (distanceToPlayer > 2) {
                 transform.rotation = Quaternion.LookRotation(Vector3.RotateTowards(transform.forward, targetDirection, turnSpeed * Time.deltaTime, 0.0f));
                 transform.position += transform.forward * speed * Time.deltaTime;
@@ -82,4 +86,23 @@ public class TSAAgentScript : MonoBehaviour {
         float angleToPlayer = Vector3.Angle(targetDirection, newAgent.transform.forward);
         newAgent.transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, angleToPlayer, transform.localEulerAngles.z);
     }
+
+    bool canSee() {
+        Vector3 playerPosition = new Vector3(player.transform.position.x, player.transform.position.y + 1, player.transform.position.z);
+        RaycastHit[] hit = Physics.RaycastAll(transform.position, playerPosition - transform.position, Vector3.Distance(transform.position, playerPosition));
+        
+        for (int i = hit.Length - 1; i > -1; i--)
+        {
+            if (hit[i].collider.gameObject.tag != "Player")
+            {
+                return false;
+                
+            }
+        }
+        Debug.DrawRay(transform.position, playerPosition - transform.position, Color.green);
+        Debug.Log(hit.Length);
+        return true;
+        
+    }
+
 }
