@@ -13,6 +13,14 @@ public class BillboardScript : MonoBehaviour {
     private float alpha = 0f;
     private SpriteRenderer sr;
 
+    public Sprite twitter;
+    public Sprite tumblr;
+    public Sprite camera;
+
+    public Vector3 twitterSize;
+    public Vector3 tumblrSize;
+    public Vector3 cameraSize;
+
 	// Use this for initialization
 	void Start () {
         sr = GetComponent<SpriteRenderer>();
@@ -26,9 +34,11 @@ public class BillboardScript : MonoBehaviour {
         Heading.y += 180f;
         transform.rotation = Quaternion.Euler(Heading);
         if (Input.GetKeyDown(KeyCode.Alpha1)) {
-            makeVisible();
+            makeVisible("twitter");
         } else if (Input.GetKeyDown(KeyCode.Alpha2)) {
-
+            makeVisible("tumblr");
+        } else if(Input.GetKeyDown(KeyCode.Alpha3)) {
+            makeVisible("camera");
         }
 
         if (showingUp){
@@ -49,8 +59,9 @@ public class BillboardScript : MonoBehaviour {
         }
     }
 
-    public void makeVisible() {
+    public void makeVisible(string media) {
         if (!on) {
+            setMedia(media);
             on = true;
             showingUp = true;
             closingDown = false;
@@ -59,6 +70,19 @@ public class BillboardScript : MonoBehaviour {
             on = false;
             showingUp = false;
             closingDown = true;
+        }
+    }
+
+    void setMedia(string media) {
+        if (media == "twitter") {
+            sr.sprite = twitter;
+            transform.localScale = twitterSize;
+        } else if(media == "tumblr") {
+            sr.sprite = tumblr;
+            transform.localScale = tumblrSize;
+        } else {
+            sr.sprite = camera;
+            transform.localScale = cameraSize;
         }
     }
 

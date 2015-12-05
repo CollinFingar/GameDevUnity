@@ -65,7 +65,7 @@ public class BeCivilian : MonoBehaviour {
                 {
                     if (!iconShown)
                     {
-                        mediaIcon.makeVisible();
+                        mediaIcon.makeVisible("camera");
                         iconShown = true;
                     }
                     FlagsReturnedFromBehaviour = TakeSelfie(Action.transform.position, Action.Parameter);
@@ -74,7 +74,7 @@ public class BeCivilian : MonoBehaviour {
                 {
                     if (!iconShown)
                     {
-                        mediaIcon.makeVisible();
+                        mediaIcon.makeVisible("twitter");
                         iconShown = true;
                     }
                     FlagsReturnedFromBehaviour = UseTwitter(Action.transform.position, Action.Parameter);
@@ -83,7 +83,7 @@ public class BeCivilian : MonoBehaviour {
                 {
                     if (!iconShown)
                     {
-                        mediaIcon.makeVisible();
+                        mediaIcon.makeVisible("tumblr");
                         iconShown = true;
                     }
                     FlagsReturnedFromBehaviour = UseTumblr(Action.transform.position, Action.Parameter);
@@ -127,7 +127,7 @@ public class BeCivilian : MonoBehaviour {
             EndedSelfie = false;
             TakingSelfie = false;
             iconShown = false;
-            mediaIcon.makeVisible();
+            mediaIcon.makeVisible("camera");
             // Set animation normal
             return ActionFlag.ActionComplete;
         }
@@ -178,7 +178,7 @@ public class BeCivilian : MonoBehaviour {
         {                                
             elapsedSeconds = 0;
             caughtPlayer = false;
-            mediaIcon.makeVisible();
+            mediaIcon.makeVisible("twitter");
             iconShown = false;
             return ActionFlag.ActionComplete;
         }
@@ -220,7 +220,7 @@ public class BeCivilian : MonoBehaviour {
         {
             elapsedSeconds = 0;
             caughtPlayer = false;
-            mediaIcon.makeVisible();
+            mediaIcon.makeVisible("tumblr");
             iconShown = false;
             return ActionFlag.ActionComplete;
         }
