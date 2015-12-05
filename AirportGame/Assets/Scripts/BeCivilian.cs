@@ -75,7 +75,6 @@ public class BeCivilian : MonoBehaviour {
                     if (!iconShown)
                     {
                         mediaIcon.makeVisible();
-                        mediaPopUp.makeVisible("twitter");
                         iconShown = true;
                     }
                     FlagsReturnedFromBehaviour = UseTwitter(Action.transform.position, Action.Parameter);
@@ -85,7 +84,6 @@ public class BeCivilian : MonoBehaviour {
                     if (!iconShown)
                     {
                         mediaIcon.makeVisible();
-                        mediaPopUp.makeVisible("tumblr");
                         iconShown = true;
                     }
                     FlagsReturnedFromBehaviour = UseTumblr(Action.transform.position, Action.Parameter);
@@ -129,9 +127,7 @@ public class BeCivilian : MonoBehaviour {
             EndedSelfie = false;
             TakingSelfie = false;
             iconShown = false;
-            mediaPopUp.makeVisible("end");
             mediaIcon.makeVisible();
-
             // Set animation normal
             return ActionFlag.ActionComplete;
         }
@@ -182,7 +178,6 @@ public class BeCivilian : MonoBehaviour {
         {                                
             elapsedSeconds = 0;
             caughtPlayer = false;
-            mediaPopUp.makeVisible("end");
             mediaIcon.makeVisible();
             iconShown = false;
             return ActionFlag.ActionComplete;
@@ -206,6 +201,7 @@ public class BeCivilian : MonoBehaviour {
                 if (!caughtPlayer)
                 {
                     Debug.Log("Player caught running next to twitter user!");
+                    mediaPopUp.showNotification("twitter");
                     caughtPlayer = true;
                 }
             }
@@ -224,7 +220,6 @@ public class BeCivilian : MonoBehaviour {
         {
             elapsedSeconds = 0;
             caughtPlayer = false;
-            mediaPopUp.makeVisible("end");
             mediaIcon.makeVisible();
             iconShown = false;
             return ActionFlag.ActionComplete;
@@ -240,6 +235,7 @@ public class BeCivilian : MonoBehaviour {
                 if (!caughtPlayer)
                 {
                     Debug.Log("Player caught next to tumblr user!");
+                    mediaPopUp.showNotification("tumblr");
                     caughtPlayer = true;
                 }
             }

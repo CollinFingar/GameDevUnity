@@ -2,18 +2,11 @@
 using System.Collections;
 
 public class PopupController : MonoBehaviour {
-
-    public Texture twitter1;
-    public Texture twitter2;
-    public Texture twitter3;
-    public Texture tumblr1;
-    public Texture tumblr2;
-    public Texture tumblr3;
-
+    
     private Texture current;
 
-    private Texture[] twitterTextures = new Texture[3];
-    private Texture[] tumblrTextures = new Texture[3];
+    public Texture[] twitterTextures;
+    public Texture[] tumblrTextures;
 
     private int twitterIndex = 2;
     private int tumblrIndex = 2;
@@ -24,14 +17,10 @@ public class PopupController : MonoBehaviour {
     private bool on = false;
     private byte alpha = 0;
 
+    private float elapsedSeconds = 0f;
+
     // Use this for initialization
     void Start () {
-        twitterTextures[0] = twitter1;
-        twitterTextures[1] = twitter2;
-        twitterTextures[2] = twitter3;
-        tumblrTextures[0] = tumblr1;
-        tumblrTextures[1] = tumblr2;
-        tumblrTextures[2] = tumblr3;
     }
 	
 	// Update is called once per frame
@@ -39,6 +28,17 @@ public class PopupController : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.Alpha2)) {
             makeVisible("twitter");
+        }
+
+        if (on)
+        {
+            float notificationDuration = 10f;
+            if (elapsedSeconds > notificationDuration)        
+            {                               
+                elapsedSeconds = 0;         
+                endNotification();          
+            }
+            elapsedSeconds += Time.deltaTime;
         }
 
         if (showingUp)
@@ -76,6 +76,22 @@ public class PopupController : MonoBehaviour {
         
     }
 
+    public void showNotification(string media)
+    {
+        setMediaTexture(media);
+        on = true;
+        showingUp = true;
+        closingDown = false;
+        elapsedSeconds = 0;
+    }
+
+    private void endNotification()
+    {
+        on = false;
+        showingUp = false;
+        closingDown = true;
+        elapsedSeconds = 0;
+    }
 
     public void makeVisible(string media)
     {
@@ -96,14 +112,14 @@ public class PopupController : MonoBehaviour {
 
     void setMediaTexture(string media) {
         if (media == "tumblr") {
-            if (tumblrIndex < 2) {
+            if (tumblrIndex < tumblrTextures.Length) {
                 tumblrIndex++;
             } else {
                 tumblrIndex = 0;
             }
             current = tumblrTextures[tumblrIndex];
         } else if (media == "twitter") {
-            if (twitterIndex < 2) {
+            if (twitterIndex < twitterTextures.Length) {
                 twitterIndex++;
             } else {
                 twitterIndex = 0;
