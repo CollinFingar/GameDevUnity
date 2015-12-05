@@ -21,7 +21,10 @@ public class BillboardScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        transform.LookAt(transform.position - player.transform.position, Vector3.up);
+        transform.LookAt(player.transform.position, Vector3.up);
+        Vector3 Heading = transform.rotation.eulerAngles;
+        Heading.y += 180f;
+        transform.rotation = Quaternion.Euler(Heading);
         if (Input.GetKeyDown(KeyCode.Alpha1)) {
             makeVisible();
         } else if (Input.GetKeyDown(KeyCode.Alpha2)) {
@@ -46,7 +49,7 @@ public class BillboardScript : MonoBehaviour {
         }
     }
 
-    void makeVisible() {
+    public void makeVisible() {
         if (!on) {
             on = true;
             showingUp = true;
