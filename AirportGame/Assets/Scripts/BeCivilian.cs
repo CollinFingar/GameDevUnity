@@ -12,6 +12,7 @@ public class BeCivilian : MonoBehaviour {
     public bool HideWaypoints = false;
     public GameObject Player;
 
+    public PopupController mediaPopUp;
     private BillboardScript mediaIcon;
     private bool iconShown = false;
 
@@ -38,6 +39,8 @@ public class BeCivilian : MonoBehaviour {
         playerLastFramePosition = Player.transform.position;
 
         mediaIcon = GetComponentInChildren<BillboardScript>();
+        if (mediaIcon == null) { Debug.LogError("BeCivilian does not have a billboard!"); }
+        if (mediaPopUp == null) { Debug.LogError("BeCivilian does not have a PopUp!"); }
     }
 	
 	// Update is called once per frame
@@ -72,6 +75,7 @@ public class BeCivilian : MonoBehaviour {
                     if (!iconShown)
                     {
                         mediaIcon.makeVisible();
+                        mediaPopUp.makeVisible("twitter");
                         iconShown = true;
                     }
                     FlagsReturnedFromBehaviour = UseTwitter(Action.transform.position, Action.Parameter);
@@ -81,6 +85,7 @@ public class BeCivilian : MonoBehaviour {
                     if (!iconShown)
                     {
                         mediaIcon.makeVisible();
+                        mediaPopUp.makeVisible("tumblr");
                         iconShown = true;
                     }
                     FlagsReturnedFromBehaviour = UseTumblr(Action.transform.position, Action.Parameter);
@@ -124,6 +129,7 @@ public class BeCivilian : MonoBehaviour {
             EndedSelfie = false;
             TakingSelfie = false;
             iconShown = false;
+            mediaPopUp.makeVisible("end");
             mediaIcon.makeVisible();
 
             // Set animation normal
@@ -176,6 +182,7 @@ public class BeCivilian : MonoBehaviour {
         {                                
             elapsedSeconds = 0;
             caughtPlayer = false;
+            mediaPopUp.makeVisible("end");
             mediaIcon.makeVisible();
             iconShown = false;
             return ActionFlag.ActionComplete;
@@ -217,6 +224,7 @@ public class BeCivilian : MonoBehaviour {
         {
             elapsedSeconds = 0;
             caughtPlayer = false;
+            mediaPopUp.makeVisible("end");
             mediaIcon.makeVisible();
             iconShown = false;
             return ActionFlag.ActionComplete;

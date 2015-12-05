@@ -936,6 +936,10 @@ Prefab:
       propertyPath: showingUp
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 132760, guid: d595d4f7b113de14187b7c462341f4fb, type: 2}
+      propertyPath: m_Name
+      value: mediaIcon
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d595d4f7b113de14187b7c462341f4fb, type: 2}
   m_IsPrefabParent: 0
@@ -1042,8 +1046,56 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HideWaypoints: 0
   Player: {fileID: 48649750}
+  mediaPopUp: {fileID: 1125642980}
   EndedSelfie: 0
   TakingSelfie: 0
+--- !u!1 &1125642979
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1125642981}
+  - 114: {fileID: 1125642980}
+  m_Layer: 0
+  m_Name: mediaPopUp
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1125642980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1125642979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 086716e69ff57994a908d1bab09cf4f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  twitter1: {fileID: 2800000, guid: afdf659ac187c544cadae647f68f6a4e, type: 3}
+  twitter2: {fileID: 2800000, guid: 97e20ce7a96830e4e838a701622559fc, type: 3}
+  twitter3: {fileID: 2800000, guid: 0ace22775d66850448cacf4af2eeb44f, type: 3}
+  tumblr1: {fileID: 2800000, guid: 47ea8643da4576241abb45a72468d148, type: 3}
+  tumblr2: {fileID: 2800000, guid: 6debf8d0362b8e54cad038d3d94e3064, type: 3}
+  tumblr3: {fileID: 2800000, guid: 0556ec91e7d6be64197ba6a502be27d7, type: 3}
+  showingUp: 0
+  closingDown: 0
+--- !u!4 &1125642981
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1125642979}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -23.3650093, y: -18.765604, z: 8.91861916}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
 --- !u!1 &1166203443
 GameObject:
   m_ObjectHideFlags: 0
