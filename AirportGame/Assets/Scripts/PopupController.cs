@@ -114,16 +114,16 @@ public class PopupController : MonoBehaviour {
 
     void setMediaTexture(string media) {
         if (media == "tumblr") {
-            if (tumblrIndex < tumblrTextures.Length) {
-                tumblrIndex++;
-            } else {
-                tumblrIndex = 0;
+            tumblrIndex++;
+            if (tumblrIndex >= tumblrTextures.Length) {
+                tumblrIndex= 0;
             }
+            Debug.Log(tumblrIndex);
             current = tumblrTextures[tumblrIndex];
         } else if (media == "twitter") {
-            if (twitterIndex < twitterTextures.Length) {
-                twitterIndex++;
-            } else {
+            twitterIndex++;
+            if (twitterIndex >= twitterTextures.Length)
+            {
                 twitterIndex = 0;
             }
             current = twitterTextures[twitterIndex];
