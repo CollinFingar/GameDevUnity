@@ -79,7 +79,7 @@ public class PopupController : MonoBehaviour {
     }
 
 
-    void makeVisible(string media)
+    public void makeVisible(string media)
     {
         if (!on)
         {

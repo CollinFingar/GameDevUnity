@@ -12,6 +12,10 @@ public class BeCivilian : MonoBehaviour {
     public bool HideWaypoints = false;
     public GameObject Player;
 
+    public PopupController mediaPopUp;
+    private BillboardScript mediaIcon;
+    private bool iconShown = false;
+
     // Behaviour Specific:
     // Wait
     float elapsedSeconds = 0f;
@@ -33,6 +37,10 @@ public class BeCivilian : MonoBehaviour {
             Action.transform.parent = null;
         }
         playerLastFramePosition = Player.transform.position;
+
+        mediaIcon = GetComponentInChildren<BillboardScript>();
+        if (mediaIcon == null) { Debug.LogError("BeCivilian does not have a billboard!"); }
+        if (mediaPopUp == null) { Debug.LogError("BeCivilian does not have a PopUp!"); }
     }
 	
 	// Update is called once per frame
@@ -55,14 +63,31 @@ public class BeCivilian : MonoBehaviour {
                 } break;
             case (CivAction.TakeSelfie):
                 {
+                    if (!iconShown)
+                    {
+                        mediaIcon.makeVisible();
+                        iconShown = true;
+                    }
                     FlagsReturnedFromBehaviour = TakeSelfie(Action.transform.position, Action.Parameter);
                 } break;
             case (CivAction.UseTwitter):
                 {
+                    if (!iconShown)
+                    {
+                        mediaIcon.makeVisible();
+                        mediaPopUp.makeVisible("twitter");
+                        iconShown = true;
+                    }
                     FlagsReturnedFromBehaviour = UseTwitter(Action.transform.position, Action.Parameter);
                 } break;
             case (CivAction.UseTumblr):
                 {
+                    if (!iconShown)
+                    {
+                        mediaIcon.makeVisible();
+                        mediaPopUp.makeVisible("tumblr");
+                        iconShown = true;
+                    }
                     FlagsReturnedFromBehaviour = UseTumblr(Action.transform.position, Action.Parameter);
                 } break;
             default:
@@ -103,6 +128,9 @@ public class BeCivilian : MonoBehaviour {
         {
             EndedSelfie = false;
             TakingSelfie = false;
+            iconShown = false;
+            mediaPopUp.makeVisible("end");
+            mediaIcon.makeVisible();
 
             // Set animation normal
             return ActionFlag.ActionComplete;
@@ -122,7 +150,6 @@ public class BeCivilian : MonoBehaviour {
             // ======================================= TEMP while no animations
 
             if (!HideWaypoints) { ShowDebugSelfieIndications(TargetPosition); }
-            ShowSelfieIndications(TargetPosition);
 
         }
         else
@@ -145,7 +172,6 @@ public class BeCivilian : MonoBehaviour {
         {
             Debug.Log("Player Caught in a selfie!");
         }
-
         EndedSelfie = true;
     }
 
@@ -156,6 +182,9 @@ public class BeCivilian : MonoBehaviour {
         {                                
             elapsedSeconds = 0;
             caughtPlayer = false;
+            mediaPopUp.makeVisible("end");
+            mediaIcon.makeVisible();
+            iconShown = false;
             return ActionFlag.ActionComplete;
         }
         
@@ -185,7 +214,6 @@ public class BeCivilian : MonoBehaviour {
         elapsedSeconds += Time.deltaTime;
 
         if (!HideWaypoints) { ShowDebugTwitterIndications(TargetPosition, hazardColor); }
-        //ShowTwitterIndications(TargetPosition);
         return 0;    
     }
 
@@ -196,6 +224,9 @@ public class BeCivilian : MonoBehaviour {
         {
             elapsedSeconds = 0;
             caughtPlayer = false;
+            mediaPopUp.makeVisible("end");
+            mediaIcon.makeVisible();
+            iconShown = false;
             return ActionFlag.ActionComplete;
         }
 
@@ -231,11 +262,6 @@ public class BeCivilian : MonoBehaviour {
 
         elapsedSeconds += Time.deltaTime;
         return 0;
-    }
-
-    void ShowSelfieIndications(Vector3 TargetPosition)
-    {
-
     }
 
     void ShowDebugSelfieIndications(Vector3 TargetPosition)
