@@ -3,7 +3,20 @@ using System.Collections;
 
 public class PopupController : MonoBehaviour {
 
-    public Texture aTexture;
+    public Texture twitter1;
+    public Texture twitter2;
+    public Texture twitter3;
+    public Texture tumblr1;
+    public Texture tumblr2;
+    public Texture tumblr3;
+
+    private Texture current;
+
+    private Texture[] twitterTextures = new Texture[3];
+    private Texture[] tumblrTextures = new Texture[3];
+
+    private int twitterIndex = 2;
+    private int tumblrIndex = 2;
 
     public bool showingUp = false;
     public bool closingDown = false;
@@ -13,14 +26,19 @@ public class PopupController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-	
-	}
+        twitterTextures[0] = twitter1;
+        twitterTextures[1] = twitter2;
+        twitterTextures[2] = twitter3;
+        tumblrTextures[0] = tumblr1;
+        tumblrTextures[1] = tumblr2;
+        tumblrTextures[2] = tumblr3;
+    }
 	
 	// Update is called once per frame
 	void Update () {
 
         if (Input.GetKeyDown(KeyCode.Alpha2)) {
-            makeVisible();
+            makeVisible("twitter");
         }
 
         if (showingUp)
@@ -52,16 +70,18 @@ public class PopupController : MonoBehaviour {
     void OnGUI() {
         if (on || (closingDown)) {
             GUI.color = new Color32(255, 255, 255, alpha);
-            GUI.DrawTexture(new Rect(Screen.width - 400, 0, 400, 200), aTexture, ScaleMode.StretchToFill, true, 10.0F);
+            
+            GUI.DrawTexture(new Rect(Screen.width - 400, 0, 400, 200), current, ScaleMode.StretchToFill, true, 10.0F);
         }
         
     }
 
 
-    void makeVisible()
+    void makeVisible(string media)
     {
         if (!on)
         {
+            setMediaTexture(media);
             on = true;
             showingUp = true;
             closingDown = false;
@@ -74,5 +94,22 @@ public class PopupController : MonoBehaviour {
         }
     }
 
+    void setMediaTexture(string media) {
+        if (media == "tumblr") {
+            if (tumblrIndex < 2) {
+                tumblrIndex++;
+            } else {
+                tumblrIndex = 0;
+            }
+            current = tumblrTextures[tumblrIndex];
+        } else if (media == "twitter") {
+            if (twitterIndex < 2) {
+                twitterIndex++;
+            } else {
+                twitterIndex = 0;
+            }
+            current = twitterTextures[twitterIndex];
+        }
+    }
 
 }
