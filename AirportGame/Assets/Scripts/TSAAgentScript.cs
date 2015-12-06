@@ -100,7 +100,7 @@ public class TSAAgentScript : MonoBehaviour {
         GameObject newAgent = (GameObject)Instantiate(itself, location, Quaternion.identity);
         Vector3 targetDirection = player.transform.position - newAgent.transform.position;
         float angleToPlayer = Vector3.Angle(targetDirection, newAgent.transform.forward);
-        newAgent.transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, angleToPlayer, transform.localEulerAngles.z);
+        newAgent.transform.localEulerAngles = new Vector3(newAgent.transform.localEulerAngles.x, -angleToPlayer, newAgent.transform.localEulerAngles.z);
     }
 
     //Raycast in the player's direction. If there isn't anything, return true. Else, return false.
