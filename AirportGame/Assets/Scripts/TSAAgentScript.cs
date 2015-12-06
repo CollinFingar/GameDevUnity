@@ -14,8 +14,12 @@ public class TSAAgentScript : MonoBehaviour {
     public bool movingBack = false;
 
     //Details of it's watch post
-    private Vector3 watchSpot = new Vector3();
+    private Vector3 watchSpot1 = new Vector3();
     private Vector3 watchRotation = new Vector3();
+
+    public bool movingBackToStart = false;
+
+    public Vector3 watchSpot2 = new Vector3();
 
     public Vector3 EXAMPLE_SPAWN_LOCATION = new Vector3(16, -.85f, 10);
     public GameObject itself;
@@ -26,7 +30,7 @@ public class TSAAgentScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        watchSpot = transform.position;
+        watchSpot1 = transform.position;
         watchRotation = transform.localEulerAngles;
         rb = GetComponent<Rigidbody>();
         warningScript = player.GetComponent<TSAWarning>();
@@ -63,16 +67,30 @@ public class TSAAgentScript : MonoBehaviour {
                 warningScript.numberChasing -= 1;
             }
             //If on the way back to it's guard location
-            if (movingBack)
+            if (true)
             {
-                //move there
-                targetDirection = watchSpot - transform.position;
-                transform.rotation = Quaternion.LookRotation(Vector3.RotateTowards(transform.forward, targetDirection, turnSpeed * Time.deltaTime, 0.0f));
-                transform.position += transform.forward * speed * Time.deltaTime;
-                //If close enough, stop
-                if (Vector3.Distance(watchSpot, transform.position) < 2) {
-                    movingBack = false;
+                Vector3 destination;
+                if (movingBackToStart) {
+                    if(Vector3.Distance(transform.position, watchSpot1) < 2) {
+                        movingBackToStart = false;
+                        destination = watchSpot2;
+                    } else {
+                        destination = watchSpot1;
+                    }
+                } else {
+                    if (Vector3.Distance(transform.position, watchSpot2) < 2) {
+                        movingBackToStart = true;
+                        destination = watchSpot1;
+                    } else {
+                        destination = watchSpot2;
+                    }
                 }
+                //move there
+                targetDirection = destination - transform.position;
+                transform.rotation = Quaternion.LookRotation(Vector3.RotateTowards(transform.forward, targetDirection, turnSpeed * Time.deltaTime, 0.0f));
+                transform.position += transform.forward * speed/2 * Time.deltaTime;
+                //If close enough, stop
+                
             }
             //If back, check rotation and rotate accordingly
             else {
