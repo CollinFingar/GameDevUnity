@@ -31,7 +31,7 @@ public class AutoTile : MonoBehaviour {
                 break;
         }
         scale *= (1f / size);
-        GetComponent<Renderer>().sharedMaterial.mainTextureScale = scale;
+        GetComponent<Renderer>().material.mainTextureScale = scale;
     }
 
     void OnDrawGizmos()
