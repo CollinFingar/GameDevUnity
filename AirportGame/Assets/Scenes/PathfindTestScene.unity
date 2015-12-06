@@ -651,6 +651,7 @@ GameObject:
   - 54: {fileID: 1666972169}
   - 136: {fileID: 1666972168}
   - 114: {fileID: 1666972167}
+  - 114: {fileID: 1666972170}
   m_Layer: 0
   m_Name: RigidBodyFPSController
   m_TagString: Player
@@ -755,3 +756,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &1666972170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1666972165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 530bdfb2ea4c4ad4593ab37912c669d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numberChasing: 0
+  interval: .25
+  logo: {fileID: 2800000, guid: f662cf3497b7e8642876cc9655796835, type: 3}

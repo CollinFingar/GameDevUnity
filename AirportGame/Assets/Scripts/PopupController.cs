@@ -32,36 +32,28 @@ public class PopupController : MonoBehaviour {
             makeVisible("twitter");
         }
 
-        if (on)
-        {
+        if (on){
             float notificationDuration = 10f;
-            if (elapsedSeconds > notificationDuration)        
-            {                               
+            if (elapsedSeconds > notificationDuration){                               
                 elapsedSeconds = 0;         
                 endNotification();          
             }
             elapsedSeconds += Time.deltaTime;
         }
 
-        if (showingUp)
-        {
-            if (alpha <  200)
-            {
+        if (showingUp){
+            if (alpha <  200){
                 alpha += 20;
             }
-            else
-            {
+            else{
                 showingUp = false;
             }
         }
-        if (closingDown)
-        {
-            if (alpha > 0)
-            {
+        if (closingDown){
+            if (alpha > 0){
                 alpha -= 20;
             }
-            else
-            {
+            else{
                 closingDown = false;
             }
         }
@@ -78,8 +70,7 @@ public class PopupController : MonoBehaviour {
         
     }
 
-    public void showNotification(string media)
-    {
+    public void showNotification(string media){
         setMediaTexture(media);
         on = true;
         showingUp = true;
@@ -87,25 +78,21 @@ public class PopupController : MonoBehaviour {
         elapsedSeconds = 0;
     }
 
-    private void endNotification()
-    {
+    private void endNotification(){
         on = false;
         showingUp = false;
         closingDown = true;
         elapsedSeconds = 0;
     }
 
-    public void makeVisible(string media)
-    {
-        if (!on)
-        {
+    public void makeVisible(string media){
+        if (!on){
             setMediaTexture(media);
             on = true;
             showingUp = true;
             closingDown = false;
         }
-        else
-        {
+        else{
             on = false;
             showingUp = false;
             closingDown = true;
