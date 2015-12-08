@@ -36,11 +36,8 @@ public class scr_CameraBehavior : MonoBehaviour {
 
 		RaycastHit info;
 		bool hit = Physics.Raycast (this.transform.position, direction, out info, seeDist, 1<<LayerMask.NameToLayer("Floor"));
-		Debug.DrawLine (this.transform.position, info.point, Color.blue, Time.deltaTime);
-        string log = "";
-        log += "point a: " + this.transform.position;
-        log += "| point b: " + info.point;
-        Debug.Log(log);
+		//Debug.DrawLine (this.transform.position, info.point, Color.blue, Time.deltaTime);
+
 
         //inSight = checkSight (player, direction);
         inSight = false;
