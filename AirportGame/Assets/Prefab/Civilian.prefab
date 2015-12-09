@@ -640,7 +640,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 181328}
-  m_LocalRotation: {x: .613456964, y: -.288084567, z: .664452493, w: .314929992}
+  m_LocalRotation: {x: .613456905, y: -.288084537, z: .664452434, w: .314929962}
   m_LocalPosition: {x: .230367348, y: .00105336774, z: .0121031543}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -1352,8 +1352,7 @@ MonoBehaviour:
   TravelSpeed: 1.39999998
   EndedSelfie: 0
   TakingSelfie: 0
-  phone: {fileID: 2370804}
-  TSAAgentRunner: {fileID: 0}
+  TSAAgentRunner: {fileID: 107868, guid: 2bcd773aa3bc8c548b5fe2b0ade8b6d1, type: 2}
   SpawnAgentLocation: {x: 0, y: 0, z: 0}
 --- !u!114 &11423074
 MonoBehaviour:

@@ -21,8 +21,6 @@ public class TSARunnerScript : MonoBehaviour {
     {
         rb = GetComponent<Rigidbody>();
         warningScript = player.GetComponent<TSAWarning>();
-        
-        
     }
 
     // Update is called once per frame
@@ -37,7 +35,6 @@ public class TSARunnerScript : MonoBehaviour {
         //If the player is close enough to be noticed, in front of the agent, and not blocked by anything
         if (distanceToPlayer < noticeDistance && angleToPlayer < 30 && canSee())
         {
-            Debug.Log("skjdlfjsdf");
             if (firstTime) {
                 warningScript.numberChasing += 1;
                 chased = true;
@@ -54,6 +51,7 @@ public class TSARunnerScript : MonoBehaviour {
             else
             {
                 //End the game
+                Debug.Log("kill");
                 Application.LoadLevel(Application.loadedLevelName);
             }
         }

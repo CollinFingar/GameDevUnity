@@ -224,6 +224,7 @@ public class BeCivilian : MonoBehaviour {
             indicator.SetActive(true);
             indicator.transform.position = transform.position + (.5f * (TargetPosition - transform.position)) + new Vector3(0,0.01f,0);
             indicator.transform.rotation = SelfieDirection;
+            indicatorRenderer.material.color = Color.blue;
             indicatorRenderer.material.mainTexture = arcIndicator;
             float scale = hazardDistance * .1f;
             indicator.transform.localScale = new Vector3(scale, scale, scale);
@@ -248,6 +249,7 @@ public class BeCivilian : MonoBehaviour {
 
         if ((Angle < 30f) && (Vector3.Distance(transform.position,Player.transform.position) < Vector3.Magnitude(TargetPosition - transform.position)))
         {
+
             spawnAgent(Player, new Vector3(transform.position.x + 1, transform.position.y, transform.position.z + 1));
             caughtPlayer = true;
             Debug.Log("Player Caught in a selfie!");
@@ -281,9 +283,9 @@ public class BeCivilian : MonoBehaviour {
             var PlayerController = Player.GetComponent<UnityStandardAssets.Characters.FirstPerson.RigidbodyFirstPersonController>();
             float PlayerWalkSpeedDistance = PlayerController.movementSettings.ForwardSpeed * Time.deltaTime;
             float lastFramePlayerDistance = Vector3.Distance(Player.transform.position, playerLastFramePosition);
-
+            
             // Check to see if the player is hit by hazards
-            if (
+                if (
                  ( Vector3.Distance(transform.position, Player.transform.position) < hazardDistance)
                   &&
                  ( lastFramePlayerDistance > PlayerWalkSpeedDistance)
@@ -291,7 +293,7 @@ public class BeCivilian : MonoBehaviour {
             {
                 if (!caughtPlayer)
                 {
-                    spawnAgent(Player, new Vector3(transform.position.x + 1, transform.position.y, transform.position.z + 1));
+                    spawnAgent(Player, new Vector3(transform.position.x + 1, transform.position.y+1, transform.position.z + 1));
                     Debug.Log("Player caught running next to twitter user!");
                     mediaPopUp.showNotification("twitter");
                     caughtPlayer = true;
@@ -303,6 +305,7 @@ public class BeCivilian : MonoBehaviour {
 
         if (!HideWaypoints) { ShowDebugTwitterIndications(TargetPosition, hazardColor); }
         indicator.SetActive(true);
+        indicatorRenderer.material.color = hazardColor;
         indicatorRenderer.material.mainTexture = circleIndicator;
         float scale = hazardDistance * .2f;
         indicator.transform.localScale = new Vector3(scale, scale, scale);
@@ -336,7 +339,7 @@ public class BeCivilian : MonoBehaviour {
             {
                 if (!caughtPlayer)
                 {
-                    spawnAgent(Player, new Vector3(transform.position.x + 1, transform.position.y, transform.position.z + 1));
+                    spawnAgent(Player, new Vector3(transform.position.x + 1, transform.position.y+1, transform.position.z + 1));
                     Debug.Log("Player caught next to tumblr user!");
                     mediaPopUp.showNotification("tumblr");
                     caughtPlayer = true;
@@ -350,6 +353,7 @@ public class BeCivilian : MonoBehaviour {
         if (!HideWaypoints) { ShowDebugTwitterIndications(TargetPosition, hazardColor); }
         indicator.SetActive(true);
         indicatorRenderer.material.mainTexture = circleIndicator;
+        indicatorRenderer.material.color = hazardColor;
         float scale = hazardDistance * .2f;
         indicator.transform.localScale = new Vector3(scale, scale, scale);
         //ShowTwitterIndications(TargetPosition);
