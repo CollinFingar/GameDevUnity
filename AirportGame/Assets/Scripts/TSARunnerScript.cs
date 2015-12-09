@@ -40,6 +40,7 @@ public class TSARunnerScript : MonoBehaviour {
             if (firstTime) {
                 warningScript.numberChasing += 1;
                 chased = true;
+                firstTime = false;
             }
             //If the player is semi-far from the agent
             if (distanceToPlayer > 2)
