@@ -15,7 +15,7 @@ public class scr_CameraBehavior : MonoBehaviour {
 
     public bool spawnedAgent = false;
 
-    public GameObject TSAAgent;
+    public GameObject TSAAgentRunner;
     public Vector3 spawnLocation = new Vector3(0, 0, 0);
 
 	// Use this for initialization
@@ -73,11 +73,11 @@ public class scr_CameraBehavior : MonoBehaviour {
 
     void spawnAgent(GameObject player, Vector3 location)
     {
-        GameObject newAgent = (GameObject)Instantiate(TSAAgent, location, Quaternion.identity);
+        GameObject newAgent = (GameObject)Instantiate(TSAAgentRunner, location, Quaternion.identity);
         Vector3 targetDirection = player.transform.position - newAgent.transform.position;
         float angleToPlayer = Vector3.Angle(targetDirection, newAgent.transform.forward);
         newAgent.transform.localEulerAngles = new Vector3(newAgent.transform.localEulerAngles.x, -angleToPlayer, newAgent.transform.localEulerAngles.z);
-        TSAAgentScript script = newAgent.GetComponent<TSAAgentScript>();
+        TSARunnerScript script = newAgent.GetComponent<TSARunnerScript>();
         script.player = player;
 
     }
