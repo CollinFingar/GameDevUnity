@@ -28,6 +28,7 @@ public class BeCivilian : MonoBehaviour {
     // Twitter
     private bool caughtPlayer = false;
     private Vector3 playerLastFramePosition = new Vector3();
+    public MeshRenderer phone;
 
     public GameObject TSAAgentRunner;
 
@@ -36,7 +37,7 @@ public class BeCivilian : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
         QueuedBehaviours = GetComponentsInChildren<CivilianAction>();
         foreach (CivilianAction Action in QueuedBehaviours)
         {
@@ -50,14 +51,15 @@ public class BeCivilian : MonoBehaviour {
         if (mediaIcon == null) { Debug.LogError("BeCivilian does not have a billboard!"); }
         if (mediaPopUp == null) { Debug.LogError("BeCivilian does not have a PopUp!"); }
     }
-	
-	// Update is called once per frame
-	void Update () {
-        if (caughtPlayer) {
-            
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (caughtPlayer)
+        {
+
         }
 
-        oldPosition = transform.position;
         if (QueuedBehaviours.Length == 0) { return; }
 
         if (ActionIndex < 0) { ActionIndex = QueuedBehaviours.Length - 1; }
@@ -72,39 +74,51 @@ public class BeCivilian : MonoBehaviour {
                 {
                     //Debug.Log("MOve To " + Action.transform.position);
                     FlagsReturnedFromBehaviour = MoveTo(Action.transform.position);
-                } break;
+                    phone.enabled = false;
+                }
+                break;
             case (CivAction.TakeSelfie):
                 {
                     if (!iconShown)
                     {
                         mediaIcon.makeVisible("camera");
+                        animator.SetTrigger("Action");
+                        phone.enabled = true;
                         iconShown = true;
                     }
                     FlagsReturnedFromBehaviour = TakeSelfie(Action.transform.position, Action.Parameter);
-                } break;
+                }
+                break;
             case (CivAction.UseTwitter):
                 {
                     if (!iconShown)
                     {
                         mediaIcon.makeVisible("twitter");
+                        animator.SetTrigger("Action");
+                        phone.enabled = true;
                         iconShown = true;
                     }
                     FlagsReturnedFromBehaviour = UseTwitter(Action.transform.position, Action.Parameter);
-                } break;
+                }
+                break;
             case (CivAction.UseTumblr):
                 {
                     if (!iconShown)
                     {
                         mediaIcon.makeVisible("tumblr");
+                        animator.SetTrigger("Action");
+                        phone.enabled = true;
                         iconShown = true;
                     }
                     FlagsReturnedFromBehaviour = UseTumblr(Action.transform.position, Action.Parameter);
-                } break;
+                }
+                break;
             default:
             case (CivAction.Wait):
                 {
-                    FlagsReturnedFromBehaviour = Wait( Action.Parameter);
-                } break;
+                    FlagsReturnedFromBehaviour = Wait(Action.Parameter);
+                }
+                break;
         }
 
         if (FlagsReturnedFromBehaviour == ActionFlag.ActionComplete)
@@ -116,9 +130,15 @@ public class BeCivilian : MonoBehaviour {
         playerLastFramePosition = Player.transform.position;
 
         Vector3 Heading = transform.position - oldPosition;
-        Heading.Normalize();
-        Quaternion direction = Quaternion.LookRotation(Heading);
-        transform.rotation = direction;
+        if (Heading.magnitude > .0002)
+        { 
+            Heading.Normalize();
+            Quaternion direction = Quaternion.LookRotation(Heading);
+
+            animator.SetFloat("Speed", Heading.magnitude);
+            oldPosition = transform.position;
+            transform.rotation = direction;
+        }
     }
 
     ActionFlag MoveTo(Vector3 TargetPosition)

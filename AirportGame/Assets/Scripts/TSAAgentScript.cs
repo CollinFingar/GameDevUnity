@@ -38,7 +38,6 @@ public class TSAAgentScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        GetComponentInChildren<Animator>().SetFloat("Speed",Vector3.Distance(pastPosition,transform.position));
         float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
         Vector3 playerPos = new Vector3(player.transform.position.x, player.transform.position.y + 1, player.transform.position.z);
         Vector3 targetDirection = playerPos - transform.position;
