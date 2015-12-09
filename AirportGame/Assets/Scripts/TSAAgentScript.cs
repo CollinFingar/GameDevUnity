@@ -20,8 +20,7 @@ public class TSAAgentScript : MonoBehaviour {
     public bool movingBackToStart = false;
 
     public Vector3 watchSpot2 = new Vector3();
-
-    public Vector3 EXAMPLE_SPAWN_LOCATION = new Vector3(16, -.85f, 10);
+    
     public GameObject itself;
 
     private Rigidbody rb;
@@ -39,11 +38,12 @@ public class TSAAgentScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
-        Vector3 targetDirection = player.transform.position - transform.position;
+        Vector3 playerPos = new Vector3(player.transform.position.x, player.transform.position.y + 1, player.transform.position.z);
+        Vector3 targetDirection = playerPos - transform.position;
         float angleToPlayer = Vector3.Angle(targetDirection, transform.forward);
 
         //If the player is close enough to be noticed, in front of the agent, and not blocked by anything
-        if (distanceToPlayer < noticeDistance && angleToPlayer < 45 && canSee()) {
+        if (distanceToPlayer < noticeDistance && angleToPlayer < 30 && canSee()) {
             //If the player is semi-far from the agent
             if (distanceToPlayer > 2) {
                 //Rotate the agent to look at the player and move in that direction
@@ -56,7 +56,7 @@ public class TSAAgentScript : MonoBehaviour {
                 }
             } else {
                 //End the game
-                Application.LoadLevel(4);
+                Application.LoadLevel(Application.loadedLevelName);
             }
         } else {
         //Else, if the player isn't followable
@@ -105,21 +105,12 @@ public class TSAAgentScript : MonoBehaviour {
             }
             
         }
-        //Example spawn. Will be moved to big script, when made.
-        if (Input.GetKeyDown(KeyCode.T)) {
-            spawnAgent(EXAMPLE_SPAWN_LOCATION);
-        }
+
 
         transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, transform.localEulerAngles.z);
 	}
 
-    //Instantiate an agent at the location and rotated to face player
-    void spawnAgent(Vector3 location) {
-        GameObject newAgent = (GameObject)Instantiate(itself, location, Quaternion.identity);
-        Vector3 targetDirection = player.transform.position - newAgent.transform.position;
-        float angleToPlayer = Vector3.Angle(targetDirection, newAgent.transform.forward);
-        newAgent.transform.localEulerAngles = new Vector3(newAgent.transform.localEulerAngles.x, -angleToPlayer, newAgent.transform.localEulerAngles.z);
-    }
+
 
     //Raycast in the player's direction. If there isn't anything, return true. Else, return false.
     bool canSee() {

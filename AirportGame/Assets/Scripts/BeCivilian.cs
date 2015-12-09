@@ -49,6 +49,10 @@ public class BeCivilian : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (false) {
+            spawnAgent(Player, transform.position);
+        }
+
         oldPosition = transform.position;
         if (QueuedBehaviours.Length == 0) { return; }
 
@@ -347,5 +351,13 @@ public class BeCivilian : MonoBehaviour {
             Vector3 IndicationEndpoint = transform.position + (LineDirection * (Vector3.forward * Vector3.Distance(transform.position, TargetPosition)));
             Debug.DrawLine(transform.position, IndicationEndpoint, lineColor, Time.deltaTime);
         }
+    }
+
+    void spawnAgent(GameObject player, Vector3 location)
+    {
+        GameObject newAgent = (GameObject)Instantiate(Resources.Load("TSA_Agent"), location, Quaternion.identity);
+        Vector3 targetDirection = player.transform.position - newAgent.transform.position;
+        float angleToPlayer = Vector3.Angle(targetDirection, newAgent.transform.forward);
+        newAgent.transform.localEulerAngles = new Vector3(newAgent.transform.localEulerAngles.x, -angleToPlayer, newAgent.transform.localEulerAngles.z);
     }
 }
