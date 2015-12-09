@@ -16,6 +16,7 @@ public class BeCivilian : MonoBehaviour {
     public PopupController mediaPopUp;
     private BillboardScript mediaIcon;
     private bool iconShown = false;
+    public float TravelSpeed = 2f;
 
     // Behaviour Specific:
     // Wait
@@ -104,12 +105,14 @@ public class BeCivilian : MonoBehaviour {
         playerLastFramePosition = Player.transform.position;
 
         Vector3 Heading = transform.position - oldPosition;
+        Heading.Normalize();
+        Quaternion direction = Quaternion.LookRotation(Heading);
+        transform.rotation = direction;
     }
 
     ActionFlag MoveTo(Vector3 TargetPosition)
     {
         /// POSSIBLE EDITOR ARGUMENTS
-        float TravelSpeed = 2f;
         float ArriveDistance = TravelSpeed * Time.deltaTime * 1.2f;
 
         Vector3 NewPosition = Vector3.Normalize(TargetPosition - transform.position)*TravelSpeed*Time.deltaTime;
