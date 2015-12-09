@@ -1,0 +1,134 @@
+fileFormatVersion: 2
+guid: 0516b5196a77d924a8d8a9c1db75c1ee
+timeCreated: 1449603670
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: briefcase:Briefcase
+    100002: //RootNode
+    100004: Model_IdleTest:person_RIGGED:Ankle_L
+    100006: Model_IdleTest:person_RIGGED:Ankle_R
+    100008: Model_IdleTest:person_RIGGED:Back_L
+    100010: Model_IdleTest:person_RIGGED:Back_R
+    100012: Model_IdleTest:person_RIGGED:Elbow_L
+    100014: Model_IdleTest:person_RIGGED:Elbow_R
+    100016: Model_IdleTest:person_RIGGED:Heel_L
+    100018: Model_IdleTest:person_RIGGED:Heel_R
+    100020: Model_IdleTest:person_RIGGED:HIPS
+    100022: Model_IdleTest:person_RIGGED:Hips_Lower
+    100024: Model_IdleTest:person_RIGGED:Hips_Upper
+    100026: Model_IdleTest:person_RIGGED:Joints
+    100028: Model_IdleTest:person_RIGGED:Knee_L
+    100030: Model_IdleTest:person_RIGGED:Knee_R
+    100032: Model_IdleTest:person_RIGGED:MODEL_smoothedTextured:smoothed3:pCube12
+    100034: Model_IdleTest:person_RIGGED:Neck
+    100036: Model_IdleTest:person_RIGGED:Shoulder_L
+    100038: Model_IdleTest:person_RIGGED:Shoulder_R
+    100040: Model_IdleTest:person_RIGGED:Spine1
+    100042: Model_IdleTest:person_RIGGED:Spine2
+    100044: Model_IdleTest:person_RIGGED:Thigh_L
+    100046: Model_IdleTest:person_RIGGED:Thigh_R
+    100048: Model_IdleTest:person_RIGGED:Toe_L
+    100050: Model_IdleTest:person_RIGGED:Toe_R
+    100052: Model_IdleTest:person_RIGGED:Wrist_L
+    100054: Model_IdleTest:person_RIGGED:Wrist_R
+    400000: briefcase:Briefcase
+    400002: //RootNode
+    400004: Model_IdleTest:person_RIGGED:Ankle_L
+    400006: Model_IdleTest:person_RIGGED:Ankle_R
+    400008: Model_IdleTest:person_RIGGED:Back_L
+    400010: Model_IdleTest:person_RIGGED:Back_R
+    400012: Model_IdleTest:person_RIGGED:Elbow_L
+    400014: Model_IdleTest:person_RIGGED:Elbow_R
+    400016: Model_IdleTest:person_RIGGED:Heel_L
+    400018: Model_IdleTest:person_RIGGED:Heel_R
+    400020: Model_IdleTest:person_RIGGED:HIPS
+    400022: Model_IdleTest:person_RIGGED:Hips_Lower
+    400024: Model_IdleTest:person_RIGGED:Hips_Upper
+    400026: Model_IdleTest:person_RIGGED:Joints
+    400028: Model_IdleTest:person_RIGGED:Knee_L
+    400030: Model_IdleTest:person_RIGGED:Knee_R
+    400032: Model_IdleTest:person_RIGGED:MODEL_smoothedTextured:smoothed3:pCube12
+    400034: Model_IdleTest:person_RIGGED:Neck
+    400036: Model_IdleTest:person_RIGGED:Shoulder_L
+    400038: Model_IdleTest:person_RIGGED:Shoulder_R
+    400040: Model_IdleTest:person_RIGGED:Spine1
+    400042: Model_IdleTest:person_RIGGED:Spine2
+    400044: Model_IdleTest:person_RIGGED:Thigh_L
+    400046: Model_IdleTest:person_RIGGED:Thigh_R
+    400048: Model_IdleTest:person_RIGGED:Toe_L
+    400050: Model_IdleTest:person_RIGGED:Toe_R
+    400052: Model_IdleTest:person_RIGGED:Wrist_L
+    400054: Model_IdleTest:person_RIGGED:Wrist_R
+    2300000: briefcase:Briefcase
+    3300000: briefcase:Briefcase
+    4300000: Model_IdleTest:person_RIGGED:MODEL_smoothedTextured:smoothed3:pCube12
+    4300002: briefcase:Briefcase
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: Model_IdleTest:person_RIGGED:MODEL_smoothedTextured:smoothed3:pCube12
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
