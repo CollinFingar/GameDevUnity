@@ -17,6 +17,12 @@ public class Interact : MonoBehaviour {
 
     void Update()
     {
+
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+
         bool frameInteractKey = Input.GetAxis("Interact") > .5f;
 
         interactJustPressed = false;
