@@ -54,7 +54,7 @@ public class BeCivilian : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         if (caughtPlayer) {
-            spawnAgent(Player, new Vector3(transform.position.x + 1, transform.position.y, transform.position.z + 1));
+            
         }
 
         oldPosition = transform.position;
@@ -184,6 +184,7 @@ public class BeCivilian : MonoBehaviour {
 
     public void EndSelfie(Vector3 TargetPosition)
     {
+        
         // Check if the player is in the dangerous part of the hazard.
         Vector3 TargetHeading = Vector3.Normalize(TargetPosition - transform.position);
         Quaternion SelfieDirection = Quaternion.LookRotation(TargetHeading);
@@ -193,6 +194,8 @@ public class BeCivilian : MonoBehaviour {
 
         if ((Angle < 30f) && (Vector3.Distance(transform.position,Player.transform.position) < Vector3.Magnitude(TargetPosition - transform.position)))
         {
+            spawnAgent(Player, new Vector3(transform.position.x + 1, transform.position.y, transform.position.z + 1));
+            caughtPlayer = true;
             Debug.Log("Player Caught in a selfie!");
         }
         EndedSelfie = true;
@@ -232,6 +235,7 @@ public class BeCivilian : MonoBehaviour {
             {
                 if (!caughtPlayer)
                 {
+                    spawnAgent(Player, new Vector3(transform.position.x + 1, transform.position.y, transform.position.z + 1));
                     Debug.Log("Player caught running next to twitter user!");
                     mediaPopUp.showNotification("twitter");
                     caughtPlayer = true;
@@ -271,9 +275,11 @@ public class BeCivilian : MonoBehaviour {
             {
                 if (!caughtPlayer)
                 {
+                    spawnAgent(Player, new Vector3(transform.position.x + 1, transform.position.y, transform.position.z + 1));
                     Debug.Log("Player caught next to tumblr user!");
                     mediaPopUp.showNotification("tumblr");
                     caughtPlayer = true;
+                    
                 }
             }
             hazardColor = Color.red;
