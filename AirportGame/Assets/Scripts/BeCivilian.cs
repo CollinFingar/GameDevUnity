@@ -31,6 +31,8 @@ public class BeCivilian : MonoBehaviour {
 
     public GameObject TSAAgentRunner;
 
+    public Vector3 SpawnAgentLocation = new Vector3(0, 0, 0);
+
 	// Use this for initialization
 	void Start ()
     {
@@ -52,7 +54,7 @@ public class BeCivilian : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         if (false) {
-            spawnAgent(Player, transform.position);
+            spawnAgent(Player, SpawnAgentLocation);
         }
 
         oldPosition = transform.position;
@@ -360,7 +362,7 @@ public class BeCivilian : MonoBehaviour {
         GameObject newAgent = (GameObject)Instantiate(TSAAgentRunner, location, Quaternion.identity);
         Vector3 targetDirection = player.transform.position - newAgent.transform.position;
         float angleToPlayer = Vector3.Angle(targetDirection, newAgent.transform.forward);
-        newAgent.transform.localEulerAngles = new Vector3(newAgent.transform.localEulerAngles.x, -angleToPlayer, newAgent.transform.localEulerAngles.z);
+        newAgent.transform.localEulerAngles = new Vector3(newAgent.transform.localEulerAngles.x, angleToPlayer, newAgent.transform.localEulerAngles.z);
         TSARunnerScript script = newAgent.GetComponent<TSARunnerScript>();
         script.player = player;
 

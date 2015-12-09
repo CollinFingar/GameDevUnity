@@ -18,6 +18,8 @@ public class scr_CameraBehavior : MonoBehaviour {
     public GameObject TSAAgentRunner;
     public Vector3 spawnLocation = new Vector3(0, 0, 0);
 
+    public GameObject spawnedGuy;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -28,6 +30,9 @@ public class scr_CameraBehavior : MonoBehaviour {
         if (inSight && !spawnedAgent) {
             spawnAgent(player, spawnLocation);
             spawnedAgent = true;
+        }
+        if (spawnedGuy == null) {
+            spawnedAgent = false;
         }
 
 		// While camera rotation is decided on the object level, pitch most likely will not
@@ -76,9 +81,10 @@ public class scr_CameraBehavior : MonoBehaviour {
         GameObject newAgent = (GameObject)Instantiate(TSAAgentRunner, location, Quaternion.identity);
         Vector3 targetDirection = player.transform.position - newAgent.transform.position;
         float angleToPlayer = Vector3.Angle(targetDirection, newAgent.transform.forward);
-        newAgent.transform.localEulerAngles = new Vector3(newAgent.transform.localEulerAngles.x, -angleToPlayer, newAgent.transform.localEulerAngles.z);
+        newAgent.transform.localEulerAngles = new Vector3(newAgent.transform.localEulerAngles.x, angleToPlayer, newAgent.transform.localEulerAngles.z);
         TSARunnerScript script = newAgent.GetComponent<TSARunnerScript>();
         script.player = player;
+        spawnedGuy = newAgent;
 
     }
 }
