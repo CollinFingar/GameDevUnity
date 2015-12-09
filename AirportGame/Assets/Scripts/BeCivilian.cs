@@ -53,8 +53,8 @@ public class BeCivilian : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (false) {
-            spawnAgent(Player, SpawnAgentLocation);
+        if (caughtPlayer) {
+            spawnAgent(Player, new Vector3(transform.position.x + 1, transform.position.y, transform.position.z + 1));
         }
 
         oldPosition = transform.position;
