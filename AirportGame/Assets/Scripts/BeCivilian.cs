@@ -9,6 +9,7 @@ public class BeCivilian : MonoBehaviour {
     private int ActionIndex;
     private CivilianAction[] QueuedBehaviours;
     private Vector3 oldPosition;
+    private bool initializeAction = true;
 
     public bool HideWaypoints = false;
     public GameObject Player;
@@ -16,8 +17,8 @@ public class BeCivilian : MonoBehaviour {
     public PopupController mediaPopUp;
     private BillboardScript mediaIcon;
     private bool iconShown = false;
-    public float TravelSpeed = 2f;
-
+    public float TravelSpeed;
+    private Animator animator;
     // Behaviour Specific:
     // Wait
     float elapsedSeconds = 0f;
@@ -31,6 +32,7 @@ public class BeCivilian : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
+        animator = GetComponent<Animator>();
         QueuedBehaviours = GetComponentsInChildren<CivilianAction>();
         foreach (CivilianAction Action in QueuedBehaviours)
         {
@@ -99,6 +101,7 @@ public class BeCivilian : MonoBehaviour {
 
         if (FlagsReturnedFromBehaviour == ActionFlag.ActionComplete)
         {
+            initializeAction = true;
             ActionIndex++;
         }
 
@@ -112,6 +115,11 @@ public class BeCivilian : MonoBehaviour {
 
     ActionFlag MoveTo(Vector3 TargetPosition)
     {
+        if (initializeAction)
+        {
+            initializeAction = false;
+        }
+
         /// POSSIBLE EDITOR ARGUMENTS
         float ArriveDistance = TravelSpeed * Time.deltaTime * 1.2f;
 
@@ -128,6 +136,11 @@ public class BeCivilian : MonoBehaviour {
 
     ActionFlag TakeSelfie(Vector3 TargetPosition, float Distance)
     {
+        if (initializeAction)
+        {
+            initializeAction = false;
+        }
+
         if (EndedSelfie)
         {
             EndedSelfie = false;
@@ -179,6 +192,11 @@ public class BeCivilian : MonoBehaviour {
 
     ActionFlag UseTwitter(Vector3 TargetPosition, float Duration)
     {
+        if (initializeAction)
+        {
+            initializeAction = false;
+        }
+
         float startTime = 1f;
         if (elapsedSeconds > Duration)         
         {                                
@@ -221,6 +239,11 @@ public class BeCivilian : MonoBehaviour {
 
     ActionFlag UseTumblr(Vector3 TargetPosition, float Duration)
     {
+        if (initializeAction)
+        {
+            initializeAction = false;
+        }
+
         float startTime = 1f;
         if (elapsedSeconds > Duration)
         {
@@ -256,6 +279,11 @@ public class BeCivilian : MonoBehaviour {
 
     ActionFlag Wait(float Seconds)
     {
+        if (initializeAction)
+        {
+            initializeAction = false;
+        }
+
         if (elapsedSeconds > Seconds)
         {
             elapsedSeconds = 0;

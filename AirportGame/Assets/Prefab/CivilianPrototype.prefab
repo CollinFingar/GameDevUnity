@@ -1037,7 +1037,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 126848}
-  m_LocalRotation: {x: .613456905, y: -.288084537, z: .664452434, w: .314929962}
+  m_LocalRotation: {x: .613456964, y: -.288084567, z: .664452493, w: .314929992}
   m_LocalPosition: {x: .230367348, y: .00105336774, z: .0121031543}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -1364,7 +1364,7 @@ Animator:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 134506}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 3e11b8cf67287b94d81c8a3de6fd07c2, type: 3}
+  m_Avatar: {fileID: 9000000, guid: 1c5fd8e3a77773d4daef065fd16aeb91, type: 3}
   m_Controller: {fileID: 0}
   m_CullingMode: 1
   m_UpdateMode: 0
@@ -1381,7 +1381,7 @@ Animator:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 103260}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 3e11b8cf67287b94d81c8a3de6fd07c2, type: 3}
+  m_Avatar: {fileID: 9000000, guid: 1c5fd8e3a77773d4daef065fd16aeb91, type: 3}
   m_Controller: {fileID: 9100000, guid: 1f1c5c9745327564b856dfa0db366328, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
@@ -1659,6 +1659,10 @@ Prefab:
       propertyPath: TravelSpeed
       value: 1.39999998
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: 1c5fd8e3a77773d4daef065fd16aeb91, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 103260}
