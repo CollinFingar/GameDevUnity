@@ -225,7 +225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coneRadius: 30
-  seeDist: 10
+  seeDist: 100
   pitch: -45
   player: {fileID: 130926, guid: 53cc9dee742c1714c9ee1cd8548826e5, type: 2}
   inSight: 0
@@ -260,9 +260,15 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 0}
+<<<<<<< HEAD
       propertyPath: player
       value: 
       objectReference: {fileID: 130926, guid: 53cc9dee742c1714c9ee1cd8548826e5, type: 2}
+=======
+      propertyPath: seeDist
+      value: 100
+      objectReference: {fileID: 0}
+>>>>>>> 071ce947c2ad88f06a31c6240cb247bb3d4d1195
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 173560}
