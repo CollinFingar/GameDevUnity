@@ -6,6 +6,8 @@ public enum ActionFlag { None, ActionComplete};
 
 public class BeCivilian : MonoBehaviour {
 
+    public Material[] materials;
+
     private int ActionIndex;
     private CivilianAction[] QueuedBehaviours;
     private Vector3 oldPosition;
@@ -28,7 +30,7 @@ public class BeCivilian : MonoBehaviour {
     // Twitter
     private bool caughtPlayer = false;
     private Vector3 playerLastFramePosition = new Vector3();
-    public MeshRenderer phone;
+    //public MeshRenderer phone;
 
     public GameObject TSAAgentRunner;
 
@@ -37,6 +39,8 @@ public class BeCivilian : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
+        GetComponentInChildren<SkinnedMeshRenderer>().material = materials[Random.Range(0,materials.Length-1)];
+
         animator = GetComponentInChildren<Animator>();
         QueuedBehaviours = GetComponentsInChildren<CivilianAction>();
         foreach (CivilianAction Action in QueuedBehaviours)
@@ -55,12 +59,8 @@ public class BeCivilian : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (caughtPlayer)
-        {
 
-        }
-
-        if (QueuedBehaviours.Length == 0) { return; }
+        if (QueuedBehaviours == null || QueuedBehaviours.Length == 0) { return; }
 
         if (ActionIndex < 0) { ActionIndex = QueuedBehaviours.Length - 1; }
         if (ActionIndex >= QueuedBehaviours.Length) { ActionIndex = 0; }
@@ -74,7 +74,7 @@ public class BeCivilian : MonoBehaviour {
                 {
                     //Debug.Log("MOve To " + Action.transform.position);
                     FlagsReturnedFromBehaviour = MoveTo(Action.transform.position);
-                    phone.enabled = false;
+                    //phone.enabled = false;
                 }
                 break;
             case (CivAction.TakeSelfie):
@@ -83,7 +83,7 @@ public class BeCivilian : MonoBehaviour {
                     {
                         mediaIcon.makeVisible("camera");
                         animator.SetTrigger("Action");
-                        phone.enabled = true;
+                        //phone.enabled = true;
                         iconShown = true;
                     }
                     FlagsReturnedFromBehaviour = TakeSelfie(Action.transform.position, Action.Parameter);
@@ -95,7 +95,7 @@ public class BeCivilian : MonoBehaviour {
                     {
                         mediaIcon.makeVisible("twitter");
                         animator.SetTrigger("Action");
-                        phone.enabled = true;
+                        //phone.enabled = true;
                         iconShown = true;
                     }
                     FlagsReturnedFromBehaviour = UseTwitter(Action.transform.position, Action.Parameter);
@@ -107,7 +107,7 @@ public class BeCivilian : MonoBehaviour {
                     {
                         mediaIcon.makeVisible("tumblr");
                         animator.SetTrigger("Action");
-                        phone.enabled = true;
+                        //phone.enabled = true;
                         iconShown = true;
                     }
                     FlagsReturnedFromBehaviour = UseTumblr(Action.transform.position, Action.Parameter);
