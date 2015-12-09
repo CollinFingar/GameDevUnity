@@ -1,12 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
 guid: 02359d197da78c6438e50e2ccade7228
-timeCreated: 1449603669
-=======
-guid: d59ff2cefb10d8446b94f8d92f9e5bf6
-timeCreated: 1449623895
->>>>>>> 8cea4cb7faac4035db5e795910b219ee8e8e6a72
-licenseType: Free
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
@@ -87,95 +80,11 @@ ModelImporter:
     animationScaleError: .5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-<<<<<<< HEAD
     clipAnimations: []
-=======
-    clipAnimations:
-    - serializedVersion: 16
-      name: Take 001
-      takeName: Take 001
-      firstFrame: 1
-      lastFrame: 24
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      loopTime: 1
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask:
-      - path: 
-        weight: 1
-      - path: person_RIGGED:Joints
-        weight: 1
-      - path: person_RIGGED:Joints/person_RIGGED:HIPS
-        weight: 1
-      - path: person_RIGGED:Joints/person_RIGGED:HIPS/person_RIGGED:Hips_Lower
-        weight: 1
-      - path: person_RIGGED:Joints/person_RIGGED:HIPS/person_RIGGED:Hips_Lower/person_RIGGED:Thigh_L
-        weight: 1
-      - path: person_RIGGED:Joints/person_RIGGED:HIPS/person_RIGGED:Hips_Lower/person_RIGGED:Thigh_L/person_RIGGED:Knee_L
-        weight: 1
-      - path: person_RIGGED:Joints/person_RIGGED:HIPS/person_RIGGED:Hips_Lower/person_RIGGED:Thigh_L/person_RIGGED:Knee_L/person_RIGGED:Ankle_L
-        weight: 1
-      - path: person_RIGGED:Joints/person_RIGGED:HIPS/person_RIGGED:Hips_Lower/person_RIGGED:Thigh_L/person_RIGGED:Knee_L/person_RIGGED:Ankle_L/person_RIGGED:Heel_L
-        weight: 1
-      - path: person_RIGGED:Joints/person_RIGGED:HIPS/person_RIGGED:Hips_Lower/person_RIGGED:Thigh_L/person_RIGGED:Knee_L/person_RIGGED:Ankle_L/person_RIGGED:Heel_L/person_RIGGED:Toe_L
-        weight: 1
-      - path: person_RIGGED:Joints/person_RIGGED:HIPS/person_RIGGED:Hips_Lower/person_RIGGED:Thigh_R
-        weight: 1
-      - path: person_RIGGED:Joints/person_RIGGED:HIPS/person_RIGGED:Hips_Lower/person_RIGGED:Thigh_R/person_RIGGED:Knee_R
-        weight: 1
-      - path: person_RIGGED:Joints/person_RIGGED:HIPS/person_RIGGED:Hips_Lower/person_RIGGED:Thigh_R/person_RIGGED:Knee_R/person_RIGGED:Ankle_R
-        weight: 1
-      - path: person_RIGGED:Joints/person_RIGGED:HIPS/person_RIGGED:Hips_Lower/person_RIGGED:Thigh_R/person_RIGGED:Knee_R/person_RIGGED:Ankle_R/person_RIGGED:Heel_R
-        weight: 1
-      - path: person_RIGGED:Joints/person_RIGGED:HIPS/person_RIGGED:Hips_Lower/person_RIGGED:Thigh_R/person_RIGGED:Knee_R/person_RIGGED:Ankle_R/person_RIGGED:Heel_R/person_RIGGED:Toe_R
-        weight: 1
-      - path: person_RIGGED:Joints/person_RIGGED:HIPS/person_RIGGED:Hips_Upper
-        weight: 1
-      - path: person_RIGGED:Joints/person_RIGGED:HIPS/person_RIGGED:Hips_Upper/person_RIGGED:Spine1
-        weight: 1
-      - path: person_RIGGED:Joints/person_RIGGED:HIPS/person_RIGGED:Hips_Upper/person_RIGGED:Spine1/person_RIGGED:Spine2
-        weight: 1
-      - path: person_RIGGED:Joints/person_RIGGED:HIPS/person_RIGGED:Hips_Upper/person_RIGGED:Spine1/person_RIGGED:Spine2/person_RIGGED:Back_L
-        weight: 1
-      - path: person_RIGGED:Joints/person_RIGGED:HIPS/person_RIGGED:Hips_Upper/person_RIGGED:Spine1/person_RIGGED:Spine2/person_RIGGED:Back_L/person_RIGGED:Shoulder_L
-        weight: 1
-      - path: person_RIGGED:Joints/person_RIGGED:HIPS/person_RIGGED:Hips_Upper/person_RIGGED:Spine1/person_RIGGED:Spine2/person_RIGGED:Back_L/person_RIGGED:Shoulder_L/person_RIGGED:Elbow_L
-        weight: 1
-      - path: person_RIGGED:Joints/person_RIGGED:HIPS/person_RIGGED:Hips_Upper/person_RIGGED:Spine1/person_RIGGED:Spine2/person_RIGGED:Back_L/person_RIGGED:Shoulder_L/person_RIGGED:Elbow_L/person_RIGGED:Wrist_L
-        weight: 1
-      - path: person_RIGGED:Joints/person_RIGGED:HIPS/person_RIGGED:Hips_Upper/person_RIGGED:Spine1/person_RIGGED:Spine2/person_RIGGED:Back_R
-        weight: 1
-      - path: person_RIGGED:Joints/person_RIGGED:HIPS/person_RIGGED:Hips_Upper/person_RIGGED:Spine1/person_RIGGED:Spine2/person_RIGGED:Back_R/person_RIGGED:Shoulder_R
-        weight: 1
-      - path: person_RIGGED:Joints/person_RIGGED:HIPS/person_RIGGED:Hips_Upper/person_RIGGED:Spine1/person_RIGGED:Spine2/person_RIGGED:Back_R/person_RIGGED:Shoulder_R/person_RIGGED:Elbow_R
-        weight: 1
-      - path: person_RIGGED:Joints/person_RIGGED:HIPS/person_RIGGED:Hips_Upper/person_RIGGED:Spine1/person_RIGGED:Spine2/person_RIGGED:Back_R/person_RIGGED:Shoulder_R/person_RIGGED:Elbow_R/person_RIGGED:Wrist_R
-        weight: 1
-      - path: person_RIGGED:Joints/person_RIGGED:HIPS/person_RIGGED:Hips_Upper/person_RIGGED:Spine1/person_RIGGED:Spine2/person_RIGGED:Neck
-        weight: 1
-      - path: person_RIGGED:MODEL_smoothedTextured:smoothed3:pCube12
-        weight: 1
-      maskType: 0
-      maskSource: {instanceID: 0}
->>>>>>> 8cea4cb7faac4035db5e795910b219ee8e8e6a72
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 0
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
