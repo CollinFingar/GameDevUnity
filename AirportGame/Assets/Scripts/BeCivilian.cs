@@ -8,6 +8,7 @@ public class BeCivilian : MonoBehaviour {
 
     private int ActionIndex;
     private CivilianAction[] QueuedBehaviours;
+    private Vector3 oldPosition;
 
     public bool HideWaypoints = false;
     public GameObject Player;
@@ -45,7 +46,7 @@ public class BeCivilian : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+        oldPosition = transform.position;
         if (QueuedBehaviours.Length == 0) { return; }
 
         if (ActionIndex < 0) { ActionIndex = QueuedBehaviours.Length - 1; }
@@ -101,6 +102,8 @@ public class BeCivilian : MonoBehaviour {
         }
 
         playerLastFramePosition = Player.transform.position;
+
+        Vector3 Heading = transform.position - oldPosition;
     }
 
     ActionFlag MoveTo(Vector3 TargetPosition)
