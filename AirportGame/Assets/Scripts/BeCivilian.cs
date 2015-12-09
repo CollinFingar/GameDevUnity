@@ -21,6 +21,13 @@ public class BeCivilian : MonoBehaviour {
     private bool iconShown = false;
     public float TravelSpeed;
     private Animator animator;
+
+    //Behaviour Warnings:
+    private GameObject indicator;
+    private Renderer indicatorRenderer;
+    private Texture circleIndicator;
+    private Texture arcIndicator;
+
     // Behaviour Specific:
     // Wait
     float elapsedSeconds = 0f;
@@ -39,6 +46,16 @@ public class BeCivilian : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
+        indicator = GameObject.CreatePrimitive(PrimitiveType.Plane);
+        indicator.transform.parent = transform;
+        indicator.transform.position = transform.position + new Vector3(0,0.01f,0);
+        indicatorRenderer = indicator.GetComponent<Renderer>();
+        arcIndicator = Resources.Load("arc") as Texture;
+        circleIndicator = Resources.Load("circle") as Texture;
+        indicatorRenderer.material = Resources.Load("Hazmat") as Material;
+        indicatorRenderer.material.mainTexture = arcIndicator;
+        indicator.SetActive(false);
+
         GetComponentInChildren<SkinnedMeshRenderer>().material = materials[Random.Range(0,materials.Length-1)];
 
         animator = GetComponentInChildren<Animator>();
@@ -178,6 +195,8 @@ public class BeCivilian : MonoBehaviour {
             TakingSelfie = false;
             iconShown = false;
             mediaIcon.makeVisible("camera");
+            indicator.transform.position = transform.position + new Vector3(0, 0.01f, 0); ;
+            indicator.transform.rotation = new Quaternion();
             // Set animation normal
             return ActionFlag.ActionComplete;
         }
@@ -185,7 +204,7 @@ public class BeCivilian : MonoBehaviour {
         Vector3 TargetHeading = Vector3.Normalize(TargetPosition - transform.position);
         Quaternion SelfieDirection = Quaternion.LookRotation(TargetHeading);
         transform.rotation = SelfieDirection;
-
+        float hazardDistance = Vector3.Distance(TargetPosition, transform.position);
 
         if (TakingSelfie)
         {
@@ -202,6 +221,12 @@ public class BeCivilian : MonoBehaviour {
             // ======================================= TEMP while no animations
 
             if (!HideWaypoints) { ShowDebugSelfieIndications(TargetPosition); }
+            indicator.SetActive(true);
+            indicator.transform.position = transform.position + (.5f * (TargetPosition - transform.position)) + new Vector3(0,0.01f,0);
+            indicator.transform.rotation = SelfieDirection;
+            indicatorRenderer.material.mainTexture = arcIndicator;
+            float scale = hazardDistance * .1f;
+            indicator.transform.localScale = new Vector3(scale, scale, scale);
 
         }
         else
@@ -243,11 +268,14 @@ public class BeCivilian : MonoBehaviour {
             elapsedSeconds = 0;
             caughtPlayer = false;
             mediaIcon.makeVisible("twitter");
+
+            indicator.SetActive(false);
             iconShown = false;
             return ActionFlag.ActionComplete;
         }
         
         Color hazardColor = Color.blue;
+        float hazardDistance = Vector3.Distance(transform.position, TargetPosition);
         if (elapsedSeconds > startTime)
         {
             var PlayerController = Player.GetComponent<UnityStandardAssets.Characters.FirstPerson.RigidbodyFirstPersonController>();
@@ -255,7 +283,6 @@ public class BeCivilian : MonoBehaviour {
             float lastFramePlayerDistance = Vector3.Distance(Player.transform.position, playerLastFramePosition);
 
             // Check to see if the player is hit by hazards
-            float hazardDistance = Vector3.Distance(transform.position, TargetPosition);
             if (
                  ( Vector3.Distance(transform.position, Player.transform.position) < hazardDistance)
                   &&
@@ -275,6 +302,10 @@ public class BeCivilian : MonoBehaviour {
         elapsedSeconds += Time.deltaTime;
 
         if (!HideWaypoints) { ShowDebugTwitterIndications(TargetPosition, hazardColor); }
+        indicator.SetActive(true);
+        indicatorRenderer.material.mainTexture = circleIndicator;
+        float scale = hazardDistance * .2f;
+        indicator.transform.localScale = new Vector3(scale, scale, scale);
         return 0;    
     }
 
@@ -291,15 +322,16 @@ public class BeCivilian : MonoBehaviour {
             elapsedSeconds = 0;
             caughtPlayer = false;
             mediaIcon.makeVisible("tumblr");
+            indicator.SetActive(false);
             iconShown = false;
             return ActionFlag.ActionComplete;
         }
 
+        float hazardDistance = Vector3.Distance(transform.position, TargetPosition);
         Color hazardColor = Color.blue;
         if (elapsedSeconds > startTime)
         {
             // Check to see if the player is hit by hazards
-            float hazardDistance = Vector3.Distance(transform.position, TargetPosition);
             if (Vector3.Distance(transform.position, Player.transform.position) < hazardDistance)
             {
                 if (!caughtPlayer)
@@ -316,6 +348,10 @@ public class BeCivilian : MonoBehaviour {
         elapsedSeconds += Time.deltaTime;
 
         if (!HideWaypoints) { ShowDebugTwitterIndications(TargetPosition, hazardColor); }
+        indicator.SetActive(true);
+        indicatorRenderer.material.mainTexture = circleIndicator;
+        float scale = hazardDistance * .2f;
+        indicator.transform.localScale = new Vector3(scale, scale, scale);
         //ShowTwitterIndications(TargetPosition);
         return 0;
     }
