@@ -37,6 +37,7 @@ public class TSARunnerScript : MonoBehaviour {
         //If the player is close enough to be noticed, in front of the agent, and not blocked by anything
         if (distanceToPlayer < noticeDistance && angleToPlayer < 30 && canSee())
         {
+            Debug.Log("skjdlfjsdf");
             if (firstTime) {
                 warningScript.numberChasing += 1;
                 chased = true;
@@ -59,12 +60,12 @@ public class TSARunnerScript : MonoBehaviour {
         else
         {
             SkinnedMeshRenderer r = GetComponentInChildren<SkinnedMeshRenderer>();
-            if (r.isVisible && !canSee()) {
+            if (!r.isVisible && !canSee()) {
                 if (chased) {
                     warningScript.numberChasing -= 1;
                 }
                 Destroy(gameObject);
-
+                
             }
 
         }
