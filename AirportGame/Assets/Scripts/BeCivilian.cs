@@ -130,14 +130,17 @@ public class BeCivilian : MonoBehaviour {
         playerLastFramePosition = Player.transform.position;
 
         Vector3 Heading = transform.position - oldPosition;
-        if (Heading.magnitude > .0002)
-        { 
+        if (Heading.magnitude > .00001f)
+        {
             Heading.Normalize();
             Quaternion direction = Quaternion.LookRotation(Heading);
-
             animator.SetFloat("Speed", Heading.magnitude);
             oldPosition = transform.position;
             transform.rotation = direction;
+        }
+        else
+        {
+            animator.SetFloat("Speed", 0);
         }
     }
 
@@ -178,6 +181,12 @@ public class BeCivilian : MonoBehaviour {
             // Set animation normal
             return ActionFlag.ActionComplete;
         }
+
+        Vector3 TargetHeading = Vector3.Normalize(TargetPosition - transform.position);
+        Quaternion SelfieDirection = Quaternion.LookRotation(TargetHeading);
+        transform.rotation = SelfieDirection;
+
+
         if (TakingSelfie)
         {
             // Trigger Selfie animation
